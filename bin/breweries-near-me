@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require'./lib/nolanHughes_cli_app'
+require'./lib/breweries_near_me'
 
-NolanHughesCliApp::CLI.new.call
+BreweriesNearMe::CLI.new.call

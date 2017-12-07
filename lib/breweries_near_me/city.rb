@@ -1,10 +1,11 @@
-class NolanHughesCliApp::City
+class BreweriesNearMe::City
+  attr_accessor :name, :breweries
 
   def self.all
+    puts "Here's a list of cities to choose from:"
     puts <<-DOC.gsub /^\s*/, ''
       1. Chicago
       2. Fort Collins
-      3. San Diego
     DOC
 
     city_1 = self.new
@@ -15,7 +16,7 @@ class NolanHughesCliApp::City
     city_2.name =  "Fort Collins"
     city_2.breweries = ["Odell Brewery", "New Belgium Brewing", "Snowbank Brewing"]
 
-    [brewery_1, brewery_2]
+    [city_1, city_2]
   end
 
 

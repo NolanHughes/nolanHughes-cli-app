@@ -1,4 +1,4 @@
-class NolanHughesCliApp::Breweries
+class BreweriesNearMe::Breweries
 
   def self.all(city)
     puts <<-DOC.gsub /^\s*/, ''

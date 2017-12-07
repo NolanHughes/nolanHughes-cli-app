@@ -1,5 +1,5 @@
 #Our CLI Controller
-class NolanHughesCliApp::CLI
+class BreweriesNearMe::CLI
 
   def call
     puts "Welcome to Breweries Near You!"
@@ -11,12 +11,12 @@ class NolanHughesCliApp::CLI
   end
 
   def list_cities
-    @cities = NolanHughesCliApp::City.all
+    @cities = BreweriesNearMe::City.all
   end
 
   def list_breweries(city)
     puts "Here are the breweries from that city"
-    @breweries = NolanHughesCliApp::Breweries.all(city)
+    @breweries = BreweriesNearMe::Breweries.all(city)
 
   end
 
