@@ -22,13 +22,13 @@ Shows a list of breweries in a 25 miles radius of zip code(input) Which brewery 
 What is a brewery?
 Has a name
 Has a location
+    Has link to google maps #optional
 Has a description
 Has a year established
 Has a website link
+    Has an actual link to website #optional
 Has operating hours
 Has beers
-
-What is a beer?
-Has a name
-Has availability
-Has a rating #optional
+    Has a name
+    Has availability (year round, seasonal, or limited)
+    Has a rating #optional(ability to just see top-rated beers - will need to be an option )
