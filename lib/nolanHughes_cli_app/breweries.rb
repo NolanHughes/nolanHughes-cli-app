@@ -1,6 +1,6 @@
-class NolanHughesCliApp::Brewery
+class NolanHughesCliApp::Breweries
 
-  def self.all
+  def self.all(city)
     puts <<-DOC.gsub /^\s*/, ''
       1. Begyle Brewery
       2. Half Acre Brewing Company

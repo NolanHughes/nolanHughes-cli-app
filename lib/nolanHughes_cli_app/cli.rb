@@ -14,25 +14,25 @@ class NolanHughesCliApp::CLI
     @cities = NolanHughesCliApp::City.all
   end
 
-  def list_breweries
+  def list_breweries(city)
     puts "Here are the breweries from that city"
-    @breweries = NolanHughesCliApp::Breweries.all
+    @breweries = NolanHughesCliApp::Breweries.all(city)
 
   end
 
   def city_menu
     input = nil
     while input != "exit"
-      #maybe increase name flexability
+      #maybe increase name flexability and add number
       puts "What city do you want to find breweries in? You can also type list to see all of the cities again, or type exit to leave:"
       input = gets.strip.downcase
       case input
       when "chicago" || 1
-        puts "Chicago Breweries"
+        puts "List of Chicago breweries:"
+        #list_breweries(input)
       when "fort collins" || 2
-        puts "More info on brewery 1..."
-      when "san diego" || 3
-        puts "More info on brewery 2..."
+        puts "List of Fort Collins breweries:"
+        #list_breweries(input)
       when "list"
         list_cities
       else
@@ -44,17 +44,17 @@ class NolanHughesCliApp::CLI
   def brewery_menu
     input = nil
     while input != "exit"
-      #maybe increase name flexability
+      #maybe increase name flexability and add number
       puts "Enter the number of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
       input = gets.strip.downcase
       case input
       when "list"
         list_breweries
-      when "begyle" || "1"
+      when "begyle"
         puts "More info on brewery Begyle..."
-      when "half acre" || "2"
+      when "half acre"
         puts "More info on brewery Half Acre..."
-      when "pipeworks" || "3"
+      when "pipeworks"
         puts "More info on brewery Pipeworks..."
       else
         puts "Not sure what you want. Please type list or exit."
