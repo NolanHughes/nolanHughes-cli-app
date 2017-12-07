@@ -18,3 +18,17 @@ Shows a list of breweries in a 25 miles radius of zip code(input) Which brewery 
 1. Begyle Brewery
 2. Half Acre Brewing Company
 3. Pipeworks Brewing Company
+
+What is a brewery?
+Has a name
+Has a location
+Has a description
+Has a year established
+Has a website link
+Has operating hours
+Has beers
+
+What is a beer?
+Has a name
+Has availability
+Has a rating #optional
