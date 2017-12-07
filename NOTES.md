@@ -14,3 +14,7 @@ How to Build a CLI Gem
 user types top-breweries-near-me user types zip code
 
 Shows a list of breweries in a 25 miles radius of zip code(input) Which brewery would you like more info about? Type a number or the full name
+
+1. Begyle Brewery
+2. Half Acre Brewing Company
+3. Pipeworks Brewing Company
