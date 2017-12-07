@@ -5,15 +5,16 @@ class NolanHughesCliApp::CLI
     puts "Welcome to Breweries Near You!"
     list_breweries
     menu
-    goodbye 
+    goodbye
   end
 
   def list_breweries
-    puts <<-DOC.gsub /^\s*/, ''
-      1. Begyle Brewery
-      2. Half Acre Brewing Company
-      3. Pipeworks Brewing Company
-    DOC
+    puts "What city do you want to find breweries in?"
+    # input = gets.strip.downcase
+    # case input
+    # when "chicago"
+      @breweries = NolanHughesCliApp::Breweries.all
+    # end
   end
 
   def menu
