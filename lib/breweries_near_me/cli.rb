@@ -1,5 +1,4 @@
 #Our CLI Controller
-require 'pry'
 class BreweriesNearMe::CLI
 
   def call
@@ -9,7 +8,11 @@ class BreweriesNearMe::CLI
   end
 
   def list_cities
+    puts "Here's a list of cities to choose from:"
     @cities = BreweriesNearMe::City.create_cities
+    @cities.each.with_index(1) do |city, i|
+      puts "#{i}. #{city.name}"
+    end
   end
 
   def make_and_print_breweries(city)
@@ -20,10 +23,11 @@ class BreweriesNearMe::CLI
 
   def city_menu
     input = nil
-    if input != "exit"
+    while input != "exit"
       #maybe increase name flexability and add number
-      puts "What city do you want to find breweries in? You can also type list to see all of the cities again, or type exit to leave:"
+      puts "Enter the name of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
       input = gets.strip.downcase
+
       case input
       when "chicago"
         make_and_print_breweries(input)

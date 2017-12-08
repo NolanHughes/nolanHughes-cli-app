@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require'./lib/breweries_near_me'
+require "bundler/setup"
+require "breweries_near_me"
 
 BreweriesNearMe::CLI.new.call
