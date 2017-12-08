@@ -21,10 +21,8 @@ class BreweriesNearMe::Brewery
   end
 
   def self.print_breweries
-    counter = 1
-    @all_breweries_in_city.collect do |brewery|
-      puts "#{counter}. #{brewery.name}"
-      counter += 1
+    @all_breweries_in_city.each.with_index(1) do |brewery, i|
+      puts "#{i}. #{brewery.name}"
     end
   end
 
