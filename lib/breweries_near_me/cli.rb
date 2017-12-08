@@ -5,19 +5,18 @@ class BreweriesNearMe::CLI
     puts "Welcome to Breweries Near You!"
     list_cities
     city_menu
-    # list_breweries
     # brewery_menu
     goodbye
   end
 
   def list_cities
-    @cities = BreweriesNearMe::City.all
+    @cities = BreweriesNearMe::City.create_cities
   end
 
-  def list_breweries(city)
+  def make_and_print_breweries(city)
     puts "Here are the breweries from that city"
-    @breweries = BreweriesNearMe::Breweries.all(city)
-
+    @breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    @brewery_names = BreweriesNearMe::Brewery.print_breweries
   end
 
   def city_menu
@@ -28,11 +27,9 @@ class BreweriesNearMe::CLI
       input = gets.strip.downcase
       case input
       when "chicago" || 1
-        puts "List of Chicago breweries:"
-        #list_breweries(input)
+        make_and_print_breweries(input)
       when "fort collins" || 2
-        puts "List of Fort Collins breweries:"
-        #list_breweries(input)
+        make_and_print_breweries(input)
       when "list"
         list_cities
       else

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nolanHughes_cli_app (0.1.0)
+    breweries_near_me (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -12,8 +12,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  breweries_near_me!
   bundler (~> 1.16)
-  nolanHughes_cli_app!
   rake (~> 10.0)
 
 BUNDLED WITH

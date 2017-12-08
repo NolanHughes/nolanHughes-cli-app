@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "breweries_near_me/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "nolanHughes_cli_app"
+  spec.name          = "breweries_near_me"
   spec.version       = BreweriesNearMe::VERSION
   spec.authors       = ["'Nolan Hughes'"]
   spec.email         = ["'nhughes987@gmail.com'"]
