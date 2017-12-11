@@ -22,17 +22,6 @@ class BreweriesNearMe::City
   def self.add_brewery(city)
     @city_1.breweries = BreweriesNearMe::Brewery.create_breweries(city)
     @city_2.breweries = BreweriesNearMe::Brewery.create_breweries(city)
-    # [@city_1, @city_2]
   end
-
-  def self.print_brewery_names
-    all.each do |city|
-      city.breweries.each.with_index(1) do |brewery, i|
-        puts "#{i}. #{brewery.name}"
-      end
-    end
-  end
-
-
 
 end

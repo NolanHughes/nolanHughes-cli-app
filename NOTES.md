@@ -36,5 +36,4 @@ Has beers
 
 Order should be:
 1. create cities with name and brewery(has attributes)
-2. create breweries with attributes
-3.
+2. 

@@ -3,13 +3,20 @@ class BreweriesNearMe::CLI
 
   def call
     puts "Welcome to Breweries Near You!"
-    list_cities
+    list_and_create_cities
     city_menu
+  end
+
+  def list_and_create_cities
+    puts "Here's a list of cities to choose from:"
+    @cities = BreweriesNearMe::City.create_cities
+    @cities.each.with_index(1) do |city, i|
+      puts "#{i}. #{city.name}"
+    end
   end
 
   def list_cities
     puts "Here's a list of cities to choose from:"
-    @cities = BreweriesNearMe::City.create_cities
     @cities.each.with_index(1) do |city, i|
       puts "#{i}. #{city.name}"
     end
