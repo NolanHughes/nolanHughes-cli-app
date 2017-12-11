@@ -9,15 +9,14 @@ class BreweriesNearMe::CLI
 
   def list_cities
     puts "Here's a list of cities to choose from:"
-    @cities = BreweriesNearMe::City.create_cities
+    @cities = BreweriesNearMe::City.create_city
     @cities.each.with_index(1) do |city, i|
       puts "#{i}. #{city.name}"
     end
   end
 
   def make_and_print_breweries(city)
-    puts "Here are the breweries from #{city.capitalize}"
-    # @breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    puts "Here are the breweries from #{city.capitalize}:"
     @breweries = BreweriesNearMe::City.add_brewery
     @brewery_names = BreweriesNearMe::Brewery.print_breweries
   end
@@ -56,11 +55,17 @@ class BreweriesNearMe::CLI
       when "list"
         list_breweries
       when "begyle"
-        puts "More info on brewery Begyle..."
+        puts "More info on Begyle Brewery..."
       when "half acre"
-        puts "More info on brewery Half Acre..."
+        puts "More info on Half Acre Brewing Company..."
       when "pipeworks"
-        puts "More info on brewery Pipeworks..."
+        puts "More info on Pipeworks Brewing Company..."
+      when "odell"
+        puts "More info on Odell Brewery..."
+      when "new belgium"
+        puts "More info on New Belgium Brewing..."
+      when "snowbank"
+        puts "More info on Snowbank Brewing..."
       else
         puts "Not sure what you want. Please type list or exit."
       end

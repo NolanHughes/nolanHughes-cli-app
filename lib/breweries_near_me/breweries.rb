@@ -1,5 +1,5 @@
 class BreweriesNearMe::Brewery
-  attr_accessor :name
+  attr_accessor :name, :location, :description, :hours, :year_established, :beers
 
   def initialize(name)
     @name = name
@@ -9,15 +9,22 @@ class BreweriesNearMe::Brewery
     @all_breweries_in_city = []
 
     if city.downcase == "chicago"
-      @all_breweries_in_city << self.new("Begyle Brewery")
-      @all_breweries_in_city << self.new("Half Acre Brewing Company")
-      @all_breweries_in_city << self.new("Pipeworks Brewing Company")
+      brewery_1 = self.new("Begyle Brewery")
+      brewery_1.location = "1800 W Cuyler Ave, Chicago, IL 60613"
+      brewery_1.description = "Kicks ass and has CSB!"
+      brewery_1.hours = "12-9pm"
+      brewery_1.year_established = "2012"
+      brewery_1.beers = "1. Free Bird\n 2. Begyle Blonde\n 3. Boat Shoes"
+      brewery_2 = self.new("Half Acre Brewing Company")
+      brewery_3 = self.new("Pipeworks Brewing Company")
+
+      [brewery_1, brewery_2, brewery_3]
     elsif city.downcase == "fort collins"
-      @all_breweries_in_city << self.new("Odell Brewery")
-      @all_breweries_in_city << self.new("New Belgium Brewing")
-      @all_breweries_in_city << self.new("Snowbank Brewing")
+      brewery_4 = self.new("Odell Brewery")
+      brewery_5 = self.new("New Belgium Brewing")
+      brewery_6 = self.new("Snowbank Brewing")
     end
-    @all_breweries_in_city
+    # @all_breweries_in_city
   end
 
   def self.print_breweries
