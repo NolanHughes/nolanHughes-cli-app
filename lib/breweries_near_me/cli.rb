@@ -16,8 +16,9 @@ class BreweriesNearMe::CLI
   end
 
   def make_and_print_breweries(city)
-    puts "Here are the breweries from #{city}"
-    @breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    puts "Here are the breweries from #{city.capitalize}"
+    # @breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    @breweries = BreweriesNearMe::City.add_brewery
     @brewery_names = BreweriesNearMe::Brewery.print_breweries
   end
 

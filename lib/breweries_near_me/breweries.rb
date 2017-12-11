@@ -8,11 +8,11 @@ class BreweriesNearMe::Brewery
   def self.create_breweries(city)
     @all_breweries_in_city = []
 
-    if city == "chicago"
+    if city.downcase == "chicago"
       @all_breweries_in_city << self.new("Begyle Brewery")
       @all_breweries_in_city << self.new("Half Acre Brewing Company")
       @all_breweries_in_city << self.new("Pipeworks Brewing Company")
-    elsif city == "fort collins"
+    elsif city.downcase == "fort collins"
       @all_breweries_in_city << self.new("Odell Brewery")
       @all_breweries_in_city << self.new("New Belgium Brewing")
       @all_breweries_in_city << self.new("Snowbank Brewing")
