@@ -9,16 +9,16 @@ class BreweriesNearMe::CLI
 
   def list_cities
     puts "Here's a list of cities to choose from:"
-    @cities = BreweriesNearMe::City.create_city
+    @cities = BreweriesNearMe::City.create_cities
     @cities.each.with_index(1) do |city, i|
       puts "#{i}. #{city.name}"
     end
   end
 
   def make_and_print_breweries(city)
-    puts "Here are the breweries from #{city.capitalize}:"
+    puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
     @breweries = BreweriesNearMe::City.add_brewery
-    @brewery_names = BreweriesNearMe::Brewery.print_breweries
+    @brewery_names = BreweriesNearMe::City.print_brewery_names
   end
 
   def city_menu
