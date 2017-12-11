@@ -32,3 +32,9 @@ Has beers
     Has a name
     Has availability (year round, seasonal, or limited)
     Has a rating #optional(ability to just see top-rated beers - will need to be an option )
+
+
+Order should be:
+1. create cities with name and brewery(has attributes)
+2. create breweries with attributes
+3.

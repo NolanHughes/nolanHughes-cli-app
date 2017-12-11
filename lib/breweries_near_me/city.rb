@@ -19,10 +19,10 @@ class BreweriesNearMe::City
     @@all_cities
   end
 
-  def self.add_brewery
-    @city_1.breweries = BreweriesNearMe::Brewery.create_breweries(@city_1.name)
-    @city_2.breweries = BreweriesNearMe::Brewery.create_breweries(@city_2.name)
-    [@city_1, @city_2]
+  def self.add_brewery(city)
+    @city_1.breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    @city_2.breweries = BreweriesNearMe::Brewery.create_breweries(city)
+    # [@city_1, @city_2]
   end
 
   def self.print_brewery_names

@@ -21,9 +21,12 @@ class BreweriesNearMe::Brewery
       brewery_3 = self.new("Pipeworks Brewing Company")
       @all_breweries_in_city << brewery_3
     elsif city.downcase == "fort collins"
-      brewery_4 = self.new("Odell Brewery")
-      brewery_5 = self.new("New Belgium Brewing")
-      brewery_6 = self.new("Snowbank Brewing")
+      brewery_1 = self.new("Odell Brewery")
+      @all_breweries_in_city << brewery_1
+      brewery_2 = self.new("New Belgium Brewing")
+      @all_breweries_in_city << brewery_2
+      brewery_3 = self.new("Snowbank Brewing")
+      @all_breweries_in_city << brewery_3
     end
   end
 
@@ -32,7 +35,7 @@ class BreweriesNearMe::Brewery
   end
 
   def self.print_brewery_names
-    all.each.with_index(1) do |brewery, i|
+    @all_breweries_in_city.each.with_index(1) do |brewery, i|
       puts "#{i}. #{brewery.name}"
     end
   end
