@@ -18,7 +18,7 @@ class BreweriesNearMe::CLI
   def make_and_print_breweries(city)
     puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
     @breweries = BreweriesNearMe::City.add_brewery
-    @brewery_names = BreweriesNearMe::City.print_brewery_names
+    @brewery_names = BreweriesNearMe::Brewery.print_brewery_names
   end
 
   def city_menu

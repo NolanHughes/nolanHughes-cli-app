@@ -15,6 +15,10 @@ class BreweriesNearMe::City
 
   end
 
+  def self.all
+    @@all_cities
+  end
+
   def self.add_brewery
     @city_1.breweries = BreweriesNearMe::Brewery.create_breweries(@city_1.name)
     @city_2.breweries = BreweriesNearMe::Brewery.create_breweries(@city_2.name)
@@ -22,7 +26,7 @@ class BreweriesNearMe::City
   end
 
   def self.print_brewery_names
-    @@all_cities.each do |city|
+    all.each do |city|
       city.breweries.each.with_index(1) do |brewery, i|
         puts "#{i}. #{brewery.name}"
       end
