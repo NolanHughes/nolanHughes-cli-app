@@ -24,28 +24,26 @@ class BreweriesNearMe::CLI
 
   def print_breweries(city)
     puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
-    # @breweries = BreweriesNearMe::City.add_brewery(city)
     @brewery_names = BreweriesNearMe::Brewery.print_brewery_names(city)
   end
 
   def city_menu
     input = nil
     while input != "exit"
-      #maybe increase name flexability and add number
+      #maybe add number
       puts "Enter the name of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
-      input = gets.strip.downcase
-
-      case input
+      @city_input = gets.strip.downcase
+      case @city_input
       when "chicago"
-        print_breweries(input)
+        print_breweries(@city_input)
         brewery_menu
       when "fort collins"
-        print_breweries(input)
+        print_breweries(@city_input)
         brewery_menu
       when "list"
         list_cities
-      when "exit"
-        goodbye
+      # when "exit"
+      #   goodbye
       else
         puts "Not sure what you want. Please type list or exit."
       end
@@ -53,31 +51,35 @@ class BreweriesNearMe::CLI
   end
 
   def brewery_menu
+    city_breweries = BreweriesNearMe::City.all.collect do |city|
+      if @city_input.split.collect {|word| word.capitalize}.join(" ") == city.name
+        city.breweries
+      end
+    end.compact.flatten
+
     input = nil
     while input != "exit"
-      #maybe increase name flexability and add number
+      #maybe add number
+      #add exit to city
       puts "Enter the name of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
       input = gets.strip.downcase
-      case input
-      when "list"
-        list_breweries
-      when "begyle"
-        puts "More info on Begyle Brewery..."
-      when "half acre"
-        puts "More info on Half Acre Brewing Company..."
-      when "pipeworks"
-        puts "More info on Pipeworks Brewing Company..."
-      when "odell"
-        puts "More info on Odell Brewery..."
-      when "new belgium"
-        puts "More info on New Belgium Brewing..."
-      when "snowbank"
-        puts "More info on Snowbank Brewing..."
+
+      city_breweries.each do |brewery|
+      if brewery.name.include?(input.split.collect {|word| word.capitalize}.join(" "))
+        puts "#{brewery.name}"
+        puts "Description: #{brewery.description}"
+        puts "Location: #{brewery.location}"
+        puts "Hours: #{brewery.hours}"
+        puts "Year Established: #{brewery.year_established}"
+        puts "Top-Rated Beers: \n#{brewery.beers}"
+      elsif input == "list"
+        print_breweries(input)
       else
         puts "Not sure what you want. Please type list or exit."
       end
     end
   end
+end
 
   def goodbye
     puts "Until next time!"
