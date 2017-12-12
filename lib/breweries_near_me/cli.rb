@@ -31,6 +31,8 @@ class BreweriesNearMe::CLI
     input = nil
     while input != "exit"
       #maybe add number
+      #figure out repeated sting
+      #figure out how to exit      
       puts "Enter the name of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
       @city_input = gets.strip.downcase
       case @city_input
@@ -42,8 +44,6 @@ class BreweriesNearMe::CLI
         brewery_menu
       when "list"
         list_cities
-      # when "exit"
-      #   goodbye
       else
         puts "Not sure what you want. Please type list or exit."
       end
@@ -61,6 +61,7 @@ class BreweriesNearMe::CLI
     while input != "exit"
       #maybe add number
       #add exit to city
+      #figure out repeated strings
       puts "Enter the name of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
       input = gets.strip.downcase
 
