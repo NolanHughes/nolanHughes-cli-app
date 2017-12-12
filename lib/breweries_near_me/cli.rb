@@ -19,22 +19,20 @@ class BreweriesNearMe::CLI
     end
   end
 
-  def print_breweries(city)
-    # puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
-    @brewery_names = BreweriesNearMe::Brewery.print_brewery_names(city)
+  def print_breweries
+    breweries = @cities[@city_input.to_i - 1].breweries
+    puts "Here are the list of breweries:"
+    breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
   end
 
   def city_menu
     @city_input = nil
     while @city_input != "exit"
-      #figure out repeated sting
       puts "Enter the number of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
       @city_input = gets.strip.downcase
 
       if @city_input.to_i > 0
-        breweries = @cities[@city_input.to_i - 1].breweries
-        puts "Here are the list of breweries:"
-        breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
+        print_breweries
         brewery_menu
       elsif @city_input == "list"
         list_cities
@@ -43,22 +41,8 @@ class BreweriesNearMe::CLI
       else
         puts "Not sure what you want. Please type list or exit."
       end
-
-      # case @city_input
-      # when "chicago"
-      #   print_breweries(@city_input)
-      #   brewery_menu
-      # when "fort collins"
-      #   print_breweries(@city_input)
-      #   brewery_menu
-      # when "list"
-      #   list_cities
-      # when "exit"
-      #   goodbye
-      # else
-      #   puts "Not sure what you want. Please type list or exit."
-      # end
     end
+
   end
 
   def brewery_menu
