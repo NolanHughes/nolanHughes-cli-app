@@ -20,9 +20,19 @@ class BreweriesNearMe::CLI
   end
 
   def print_breweries
-    breweries = @cities[@city_input.to_i - 1].breweries
+    @breweries = @cities[@city_input.to_i - 1].breweries
     puts "Here are the list of breweries:"
-    breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
+    @breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
+  end
+
+  def print_brewery_details
+    brewery = @breweries[@brewery_input.to_i - 1]
+    puts "#{brewery.name}"
+    puts "Description: #{brewery.description}"
+    puts "Location: #{brewery.location}"
+    puts "Hours: #{brewery.hours}"
+    puts "Year Established: #{brewery.year_established}"
+    puts "Top-Rated Beers: \n#{brewery.beers}"
   end
 
   def city_menu
@@ -46,37 +56,49 @@ class BreweriesNearMe::CLI
   end
 
   def brewery_menu
-    city_breweries = BreweriesNearMe::City.all.collect do |city|
-      if @city_input.split.collect {|word| word.capitalize}.join(" ") == city.name
-        city.breweries
-      end
-    end.compact.flatten
+    # city_breweries = BreweriesNearMe::City.all.collect do |city|
+    #   if @city_input.split.collect {|word| word.capitalize}.join(" ") == city.name
+    #     city.breweries
+    #   end
+    # end.compact.flatten
 
-    input = nil
-    while input != "exit"
+    @brewery_input = nil
+    while @brewery_input != "exit"
       #maybe add number
       #figure out repeated strings
-      puts "Enter the name of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
-      input = gets.strip.downcase
+      puts "Enter the number of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
+      @brewery_input = gets.strip.downcase
 
-      city_breweries.each do |brewery|
-      if brewery.name.include?(input.split.collect {|word| word.capitalize}.join(" "))
-        puts "#{brewery.name}"
-        puts "Description: #{brewery.description}"
-        puts "Location: #{brewery.location}"
-        puts "Hours: #{brewery.hours}"
-        puts "Year Established: #{brewery.year_established}"
-        puts "Top-Rated Beers: \n#{brewery.beers}"
-      elsif input == "list"
-        print_breweries(input)
-      elsif input == "exit"
-        goodbye
-      else
+      if @brewery_input.to_i > 0
+        print_brewery_details
         brewery_menu
+      elsif @brewery_input == "list"
+        print_breweries
+      elsif @brewery_input == "exit"
+        list_cities
+      else
+        puts "Not sure what you want. Please type list or exit."
       end
+
+      # city_breweries.each do |brewery|
+      #   if brewery.name.include?(input.split.collect {|word| word.capitalize}.join(" "))
+      #     puts "#{brewery.name}"
+      #     puts "Description: #{brewery.description}"
+      #     puts "Location: #{brewery.location}"
+      #     puts "Hours: #{brewery.hours}"
+      #     puts "Year Established: #{brewery.year_established}"
+      #     puts "Top-Rated Beers: \n#{brewery.beers}"
+      #   elsif input == "list"
+      #     print_breweries
+      #     brewery_menu
+      #   elsif input == "exit"
+      #     goodbye
+      #   else
+      #     brewery_menu
+      #   end
+      # end
     end
   end
-end
 
   def goodbye
     puts "Until next time!"
