@@ -22,10 +22,10 @@ class BreweriesNearMe::CLI
     end
   end
 
-  def make_and_print_breweries(city)
+  def print_breweries(city)
     puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
-    @breweries = BreweriesNearMe::City.add_brewery(city)
-    @brewery_names = BreweriesNearMe::Brewery.print_brewery_names
+    # @breweries = BreweriesNearMe::City.add_brewery(city)
+    @brewery_names = BreweriesNearMe::Brewery.print_brewery_names(city)
   end
 
   def city_menu
@@ -37,10 +37,10 @@ class BreweriesNearMe::CLI
 
       case input
       when "chicago"
-        make_and_print_breweries(input)
+        print_breweries(input)
         brewery_menu
       when "fort collins"
-        make_and_print_breweries(input)
+        print_breweries(input)
         brewery_menu
       when "list"
         list_cities

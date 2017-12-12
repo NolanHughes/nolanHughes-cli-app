@@ -13,15 +13,17 @@ class BreweriesNearMe::City
     @city_2.name =  "Fort Collins"
     @@all_cities << @city_2
 
+    add_breweries
   end
 
   def self.all
     @@all_cities
   end
 
-  def self.add_brewery(city)
-    @city_1.breweries = BreweriesNearMe::Brewery.create_breweries(city)
-    @city_2.breweries = BreweriesNearMe::Brewery.create_breweries(city)
+  def self.add_breweries
+    all.each do |city|
+      city.breweries = BreweriesNearMe::Brewery.create_breweries(city.name)
+    end
   end
 
 end
