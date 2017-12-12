@@ -29,7 +29,7 @@ class BreweriesNearMe::CLI
     puts "#{brewery.name}"
     puts "Description: #{brewery.description}"
     puts "Location: #{brewery.location}"
-    puts "Hours: #{brewery.hours}"
+    puts "Taproom: #{brewery.has_taproom}"
     puts "Year Established: #{brewery.year_established}"
     puts "Top-Rated Beers: \n#{brewery.beers}"
   end

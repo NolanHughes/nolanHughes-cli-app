@@ -35,5 +35,24 @@ Has beers
 
 
 Order should be:
-1. create cities with name and brewery(has attributes)
-2. 
+1. create cities with name and breweries(has attributes) #move scrape to own class
+      Top 10 cites #below
+      Top 5 breweries #based on beer average, must have a number
+2. print cities
+3. print breweries in that city
+4. print description of brewery
+
+Cities
+1. Portland
+2. San Diego
+3. Denver
+4. Seattle
+5. Chicago
+6. San Francisco
+7. NYC
+8. Grand Rapids
+9. Milwaukee
+10. Minneapolis
+
+Additions
+1. Add number of beers?
