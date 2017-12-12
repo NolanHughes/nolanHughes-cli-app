@@ -1,4 +1,3 @@
-#Our CLI Controller
 class BreweriesNearMe::CLI
 
   def call
@@ -56,16 +55,9 @@ class BreweriesNearMe::CLI
   end
 
   def brewery_menu
-    # city_breweries = BreweriesNearMe::City.all.collect do |city|
-    #   if @city_input.split.collect {|word| word.capitalize}.join(" ") == city.name
-    #     city.breweries
-    #   end
-    # end.compact.flatten
-
     @brewery_input = nil
+
     while @brewery_input != "exit"
-      #maybe add number
-      #figure out repeated strings
       puts "Enter the number of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
       @brewery_input = gets.strip.downcase
 
@@ -79,25 +71,8 @@ class BreweriesNearMe::CLI
       else
         puts "Not sure what you want. Please type list or exit."
       end
-
-      # city_breweries.each do |brewery|
-      #   if brewery.name.include?(input.split.collect {|word| word.capitalize}.join(" "))
-      #     puts "#{brewery.name}"
-      #     puts "Description: #{brewery.description}"
-      #     puts "Location: #{brewery.location}"
-      #     puts "Hours: #{brewery.hours}"
-      #     puts "Year Established: #{brewery.year_established}"
-      #     puts "Top-Rated Beers: \n#{brewery.beers}"
-      #   elsif input == "list"
-      #     print_breweries
-      #     brewery_menu
-      #   elsif input == "exit"
-      #     goodbye
-      #   else
-      #     brewery_menu
-      #   end
-      # end
     end
+
   end
 
   def goodbye

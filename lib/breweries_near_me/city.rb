@@ -4,7 +4,6 @@ class BreweriesNearMe::City
   @@all_cities = []
 
   def self.create_cities
-
     @city_1 = self.new
     @city_1.name =  "Chicago"
     @@all_cities << @city_1
@@ -15,7 +14,6 @@ class BreweriesNearMe::City
 
     add_breweries
     [@city_1, @city_2]
-
   end
 
   def self.all

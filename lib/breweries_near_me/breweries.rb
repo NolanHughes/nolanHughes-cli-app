@@ -55,14 +55,4 @@ class BreweriesNearMe::Brewery
     end
   end
 
-  def self.print_brewery_names(city_name)
-    BreweriesNearMe::City.all.each do |city|
-      if city.name.downcase == city_name
-        city.breweries.each.with_index(1) do |brewery, i|
-          puts "#{i}. #{brewery.name}"
-        end
-      end
-    end
-  end
-
 end
