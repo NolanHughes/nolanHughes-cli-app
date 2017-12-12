@@ -8,11 +8,8 @@ class BreweriesNearMe::CLI
   end
 
   def list_and_create_cities
-    puts "Here's a list of cities to choose from:"
     @cities = BreweriesNearMe::City.create_cities
-    @cities.each.with_index(1) do |city, i|
-      puts "#{i}. #{city.name}"
-    end
+    list_cities
   end
 
   def list_cities
@@ -23,30 +20,44 @@ class BreweriesNearMe::CLI
   end
 
   def print_breweries(city)
-    puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
+    # puts "Here are the breweries from #{city.split.collect {|word| word.capitalize}.join(" ")}:"
     @brewery_names = BreweriesNearMe::Brewery.print_brewery_names(city)
   end
 
   def city_menu
-    input = nil
-    while input != "exit"
-      #maybe add number
+    @city_input = nil
+    while @city_input != "exit"
       #figure out repeated sting
-      #figure out how to exit      
-      puts "Enter the name of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
+      puts "Enter the number of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
       @city_input = gets.strip.downcase
-      case @city_input
-      when "chicago"
-        print_breweries(@city_input)
+
+      if @city_input.to_i > 0
+        breweries = @cities[@city_input.to_i - 1].breweries
+        puts "Here are the list of breweries:"
+        breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
         brewery_menu
-      when "fort collins"
-        print_breweries(@city_input)
-        brewery_menu
-      when "list"
+      elsif @city_input == "list"
         list_cities
+      elsif @city_input == "exit"
+        goodbye
       else
         puts "Not sure what you want. Please type list or exit."
       end
+
+      # case @city_input
+      # when "chicago"
+      #   print_breweries(@city_input)
+      #   brewery_menu
+      # when "fort collins"
+      #   print_breweries(@city_input)
+      #   brewery_menu
+      # when "list"
+      #   list_cities
+      # when "exit"
+      #   goodbye
+      # else
+      #   puts "Not sure what you want. Please type list or exit."
+      # end
     end
   end
 
@@ -60,7 +71,6 @@ class BreweriesNearMe::CLI
     input = nil
     while input != "exit"
       #maybe add number
-      #add exit to city
       #figure out repeated strings
       puts "Enter the name of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
       input = gets.strip.downcase
@@ -75,8 +85,10 @@ class BreweriesNearMe::CLI
         puts "Top-Rated Beers: \n#{brewery.beers}"
       elsif input == "list"
         print_breweries(input)
+      elsif input == "exit"
+        goodbye
       else
-        puts "Not sure what you want. Please type list or exit."
+        brewery_menu
       end
     end
   end
