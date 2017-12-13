@@ -1,3 +1,5 @@
+#refactor everything
+
 class BreweriesNearMe::API
 
   def self.get_brewery_list(input)
@@ -14,7 +16,7 @@ class BreweriesNearMe::API
     @brewery_array = @brewery_list["data"]
     puts "Here is the list of breweries from #{input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}"
     @brewery_array.each.with_index(1) do |brewery, i|
-      
+
       puts "#{i}. #{brewery["brewery"]["name"]}"
     end
   end
