@@ -5,9 +5,11 @@ class BreweriesNearMe::CLI
     puts "Welcome to Breweries Near You!"
     puts "Please enter the name or zip code of the city where you would like to find breweries."
     @city_input = gets.strip.downcase
-    BreweriesNearMe::API.get_brewery_list(@city_input)
+
     create_city
-    create_breweries
+    # get_breweries
+
+    list_breweries
 
     brewery_menu
   end
@@ -16,8 +18,12 @@ class BreweriesNearMe::CLI
     city = BreweriesNearMe::City.create_city(@city_input)
   end
 
-  def create_breweries
-    breweries = BreweriesNearMe::Brewery.create_breweries(@city_input)
+  # def get_breweries
+  #   breweries = BreweriesNearMe::API.get_breweries(@city_input)
+  # end
+
+  def list_breweries
+    breweries = BreweriesNearMe::Brewery.all_breweries_in_city
   end
 
   def print_brewery_details

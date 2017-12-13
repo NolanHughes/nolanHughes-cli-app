@@ -56,3 +56,10 @@ Cities
 
 Additions
 1. Add number of beers?
+
+1. Get input(city)
+2. create city
+3. get all of the breweries to a brewery array
+2. create breweries
+3. add breweries to city
+4. list breweries from city

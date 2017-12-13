@@ -12,15 +12,14 @@ class BreweriesNearMe::City
   end
 
   def self.create_city(city_name)
-    city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
-    @@all_cities << city
-    add_breweries
+    @city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
+    breweries = BreweriesNearMe::API.get_breweries(city_name)
+    create_breweries
+    @@all_cities << @city
   end
 
-  def self.add_breweries
-    all.each do |city|
-      city.breweries = BreweriesNearMe::Brewery.create_breweries(city.name)
-    end
+  def self.create_breweries
+    @city.breweries = BreweriesNearMe::Brewery.create_breweries
   end
 
 end
