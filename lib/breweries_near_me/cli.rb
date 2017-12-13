@@ -1,31 +1,40 @@
+#add list and exit to everything
 class BreweriesNearMe::CLI
 
   def call
     puts "Welcome to Breweries Near You!"
     puts "Please enter the name or zip code of the city where you would like to find breweries."
-    input = gets.strip
-    BreweriesNearMe::API.get_brewery_list(input)
-    list_and_create_cities
-    city_menu
+    @city_input = gets.strip
+    BreweriesNearMe::API.get_brewery_list(@city_input)
+    #list_and_create_cities
+    create_city
+
+    brewery_menu
   end
 
-  def list_and_create_cities
-    @cities = BreweriesNearMe::City.create_cities
-    list_cities
+  def create_city
+    city = BreweriesNearMe::City.create_city(@city_input)
+    binding.pry
+    puts city.breweries
   end
 
-  def list_cities
-    puts "Here's a list of cities to choose from:"
-    @cities.each.with_index(1) do |city, i|
-      puts "#{i}. #{city.name}"
-    end
-  end
+  # def list_and_create_cities
+  #   @cities = BreweriesNearMe::City.create_cities
+  #   list_cities
+  # end
+  #
+  # def list_cities
+  #   puts "Here's a list of cities to choose from:"
+  #   @cities.each.with_index(1) do |city, i|
+  #     puts "#{i}. #{city.name}"
+  #   end
+  # end
 
-  def print_breweries
-    @breweries = @cities[@city_input.to_i - 1].breweries
-    puts "Here are the list of breweries:"
-    @breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
-  end
+  # def print_breweries
+  #   @breweries = @cities[@city_input.to_i - 1].breweries
+  #   puts "Here are the list of breweries:"
+  #   @breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
+  # end
 
   def print_brewery_details
     brewery = @breweries[@brewery_input.to_i - 1]
@@ -37,31 +46,31 @@ class BreweriesNearMe::CLI
     puts "Top-Rated Beers: \n#{brewery.beers}"
   end
 
-  def city_menu
-    @city_input = nil
-    while @city_input != "exit"
-      puts "Enter the number of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
-      @city_input = gets.strip.downcase
-
-      if @city_input.to_i > 0
-        print_breweries
-        brewery_menu
-      elsif @city_input == "list"
-        list_cities
-      elsif @city_input == "exit"
-        goodbye
-      else
-        puts "Not sure what you want. Please type list or exit."
-      end
-    end
-
-  end
+  # def city_menu
+  #   @city_input = nil
+  #   while @city_input != "exit"
+  #     puts "Enter the number of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
+  #     @city_input = gets.strip.downcase
+  #
+  #     if @city_input.to_i > 0
+  #       print_breweries
+  #       brewery_menu
+  #     elsif @city_input == "list"
+  #       list_cities
+  #     elsif @city_input == "exit"
+  #       goodbye
+  #     else
+  #       puts "Not sure what you want. Please type list or exit."
+  #     end
+  #   end
+  #
+  # end
 
   def brewery_menu
     @brewery_input = nil
 
     while @brewery_input != "exit"
-      puts "Enter the number of the brewery you'd like more info on, type list to see all breweries again, or type exit to leave:"
+      puts "Enter the number of the brewery you'd like more info on:"
       @brewery_input = gets.strip.downcase
 
       if @brewery_input.to_i > 0

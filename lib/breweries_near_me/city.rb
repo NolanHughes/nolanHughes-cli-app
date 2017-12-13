@@ -1,19 +1,9 @@
 class BreweriesNearMe::City
   attr_accessor :name, :breweries
 
-  #maybe scrape data to make this list?
-  @@top_beer_cities= {
-    "OR" => "Portland",
-    "CA" => "San Diego",
-    "CO" => "Denver",
-    "WA" => "Seattle",
-    "IL" => "Chicago",
-    "NY" => "NYC",
-    "MI" => "Grand Rapids",
-    "WI" => "Milwaukee",
-    "MN" => "Minneapolis",
-    "NC" => "Asheville"
-}
+  def initialize(name)
+    @name = name
+  end
 
   @@all_cities = []
 
@@ -21,32 +11,11 @@ class BreweriesNearMe::City
     @@all_cities
   end
 
-  def self.create_cities
-    @city_1 = self.new
-    @city_1.name =  "Chicago"
-    @@all_cities << @city_1
-
-    @city_2 = self.new
-    @city_2.name =  "Fort Collins"
-    @@all_cities << @city_2
-
+  def self.create_city(city_name)
+    city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
+    @@all_cities << city
     add_breweries
-    all
-
   end
-
-  # def self.scrape_cities
-  #   #go to beeradvocate, find the name of the city
-  #   #instantiate a city
-  #   #push city to @@all_cities
-  #   @@top_beer_cities.each do |state, city|
-  #     doc = Nokogiri::HTML(open("https://www.beeradvocate.com/place/list/?&c_id=US&s_id=#{state}&city=#{city}&sort=name&sort=avgbeers"))
-  #     binding.pry
-  #     city =
-  #     @@all_cities << city
-  #   end
-  #
-  # end
 
   def self.add_breweries
     all.each do |city|
@@ -55,5 +24,3 @@ class BreweriesNearMe::City
   end
 
 end
-
-#doc.css("#ba-content td.hr_bottom_dark").last.text.split[3]
