@@ -22,10 +22,8 @@ class BreweriesNearMe::Breweries
         brewery["brewery"]["established"],
         brewery["breweryId"]
       )
-      #change to #all if it works
       all << brewery_1
     end
-    binding.pry
   end
 
 end

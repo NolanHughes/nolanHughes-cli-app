@@ -5,14 +5,16 @@ class BreweriesNearMe::City
     @name = name
   end
 
-  @@all_cities = []
+  @@city = []
 
-  def self.all
-    @@all_cities
+  def self.city_instance
+    @@city
   end
+
 
   def self.new_city_from_input(city_name)
     city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
+    city_instance << city
   end
 
   def self.create_breweries
