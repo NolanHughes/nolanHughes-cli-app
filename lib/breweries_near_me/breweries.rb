@@ -29,8 +29,9 @@ class BreweriesNearMe::Breweries
     all_breweries_array
   end
 
-  def add_breweries_to_city(breweries)
-    binding.pry
+  def self.add_breweries_to_city(breweries)
+    city = BreweriesNearMe::City.city_instance
+    city.each { |city| city.breweries = breweries }
   end
 
 end
