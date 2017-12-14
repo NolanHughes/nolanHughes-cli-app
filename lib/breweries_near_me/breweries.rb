@@ -16,7 +16,7 @@ class BreweriesNearMe::Breweries
 
   def self.new_breweries_from_api(all_breweries_in_city)
     all_breweries_array = []
-
+    #is this still nil?
     all_breweries_in_city.each do |brewery|
       brewery_1 = self.new(
         brewery["brewery"]["name"],

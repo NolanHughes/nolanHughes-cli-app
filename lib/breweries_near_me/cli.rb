@@ -9,6 +9,7 @@ class BreweriesNearMe::CLI
   def start
     puts ""
     puts "Please enter the name of the city where you would like to find breweries."
+
     city_input = gets.strip.downcase
 
     if city_input != "exit"
@@ -52,7 +53,9 @@ class BreweriesNearMe::CLI
       puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
       brewery_input = gets.strip
 
-      if brewery_input.to_i > 0
+      range = @breweries.size
+      binding.pry
+      if brewery_input.to_i > 0 && brewery_input.to_i.between?(1, range)
         print_brewery_details(brewery_input)
         continue_with_app?
       elsif brewery_input == "list"
@@ -61,7 +64,7 @@ class BreweriesNearMe::CLI
       elsif brewery_input == "exit"
         goodbye
       else
-        puts "Not sure what you want. Please type a number, list, or exit."
+        puts "Not sure what you want. Please type a number listed by the breweries, list, or exit."
         brewery_menu
       end
     end
@@ -80,7 +83,6 @@ class BreweriesNearMe::CLI
       puts "I'm not sure what you want."
       list_breweries
       brewery_menu
-
     end
   end
 
