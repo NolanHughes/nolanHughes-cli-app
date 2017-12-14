@@ -1,5 +1,3 @@
-#refactor everything
-
 class BreweriesNearMe::API
 
   def self.get_all_brewery_info(input)
@@ -16,7 +14,20 @@ class BreweriesNearMe::API
     else
       brewery_array
     end
+  end
 
+  def self.get_year_round_beer(id)
+    beer_url = "https://api.brewerydb.com/v2/brewery/#{id}/beers?key=0cd9727ca8da27a76b3e6f7876fc6e6d&format=json"
+
+    beer_list = RestClient.get(beer_url)
+    parsed_list = JSON.parse(beer_list)
+    beer_array = parsed_list["data"]
+
+    if beer_array == nil
+      nil
+    else
+      beer_array
+    end
   end
 
 end

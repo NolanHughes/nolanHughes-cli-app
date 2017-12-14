@@ -16,7 +16,7 @@ class BreweriesNearMe::CLI
       new_city_from_input(city_input)
 
       brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
-
+      
       new_breweries_from_api(brewery_array)
       list_breweries
       brewery_menu
@@ -54,7 +54,7 @@ class BreweriesNearMe::CLI
       brewery_input = gets.strip
 
       range = @breweries.size
-      binding.pry
+
       if brewery_input.to_i > 0 && brewery_input.to_i.between?(1, range)
         print_brewery_details(brewery_input)
         continue_with_app?
