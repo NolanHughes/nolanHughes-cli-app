@@ -7,19 +7,26 @@ class BreweriesNearMe::CLI
   end
 
   def start
-    puts "Please enter the name or zip code of the city where you would like to find breweries."
+    puts "Please enter the name of the city where you would like to find breweries."
     city_input = gets.strip.downcase
-    binding.pry
-    BreweriesNearMe::API.get_all_brewery_info(city_input)
 
-    # create_city(city_input)
+    new_city_from_input(city_input)
+    brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
+    binding.pry
+    new_breweries_from_api(brewery_array)
+
+
     list_breweries(city_input)
 
     brewery_menu
   end
 
-  def create_city(city_input)
-    city = BreweriesNearMe::City.create_city(city_input)
+  def new_city_from_input(city_input)
+    BreweriesNearMe::City.new_city_from_input(city_input)
+  end
+
+  def new_breweries_from_api(brewery_array)
+    BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
   end
 
   def list_breweries
