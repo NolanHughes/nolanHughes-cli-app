@@ -11,9 +11,9 @@ class BreweriesNearMe::City
     @@all_cities
   end
 
-  def self.create_city(city_name)
+  def self.new_city_from_api(city_name)
     @city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
-    breweries = BreweriesNearMe::API.get_breweries(city_name)
+    # breweries = BreweriesNearMe::API.get_breweries(city_name)
     create_breweries
     @@all_cities << @city
   end

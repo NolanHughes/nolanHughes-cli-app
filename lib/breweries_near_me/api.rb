@@ -3,7 +3,6 @@
 class BreweriesNearMe::API
 
   def self.get_breweries(input)
-    breweries = []
     @input = input
 
     if @input.to_i > 0
@@ -15,6 +14,8 @@ class BreweriesNearMe::API
     brewery_list = RestClient.get(city_url)
     parsed_list = JSON.parse(brewery_list)
     @brewery_array = parsed_list["data"]
+    
+    BreweriesNearMe::City.create_city(city_input)
 
     BreweriesNearMe::Brewery.all << @brewery_array
   end
