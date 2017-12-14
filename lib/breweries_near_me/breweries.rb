@@ -23,8 +23,9 @@ class BreweriesNearMe::Breweries
         brewery["breweryId"]
       )
       #change to #all if it works
-      @@all_breweries_in_city << brewery_1
+      all << brewery_1
     end
+    binding.pry
   end
 
 end
