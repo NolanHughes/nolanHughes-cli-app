@@ -36,12 +36,10 @@ class BreweriesNearMe::Breweries
 
   def self.print_brewery_details(input, breweries)
     brewery = breweries[input.to_i - 1]
+    puts ""
     puts "#{brewery.name}"
     puts "Description: #{brewery.description}"
-    puts "Location: #{brewery.location}"
-    puts "Taproom: #{brewery.has_taproom}"
     puts "Year Established: #{brewery.year_established}"
-    puts "Top-Rated Beers: \n#{brewery.beers}"
   end
 
 end

@@ -1,4 +1,5 @@
-#add list and exit to everything/refactor call method big time.
+#add list and exit to everything
+#Figure out error if city_input does not equal real city
 class BreweriesNearMe::CLI
 
   def call
@@ -7,16 +8,22 @@ class BreweriesNearMe::CLI
   end
 
   def start
+    puts ""
     puts "Please enter the name of the city where you would like to find breweries."
     city_input = gets.strip.downcase
 
-    new_city_from_input(city_input)
 
-    brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
+    if city_input != "exit"
+      new_city_from_input(city_input)
 
-    new_breweries_from_api(brewery_array)
-    list_breweries
-    brewery_menu
+      brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
+
+      new_breweries_from_api(brewery_array)
+      list_breweries
+      brewery_menu
+    else
+      goodbye
+    end
   end
 
   def new_city_from_input(city_input)
@@ -25,17 +32,17 @@ class BreweriesNearMe::CLI
 
   def new_breweries_from_api(brewery_array)
     @breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
-    binding.pry
-    BreweriesNearMe::Breweries.add_breweries_to_city(breweries)
+    BreweriesNearMe::Breweries.add_breweries_to_city(@breweries)
   end
 
   def list_breweries
-    city = BreweriesNearMe::City.city_instance.pop
+    @city = BreweriesNearMe::City.city_instance.first
+
     puts ""
-    puts "Here are a list of breweries from #{city.name}:"
+    puts "Here are a list of breweries from #{@city.name}:"
     puts ""
 
-    city.breweries.each.with_index(1) do |brewery, i|
+    @city.breweries.each.with_index(1) do |brewery, i|
       puts "#{i}. #{brewery.name}"
     end
   end
@@ -43,26 +50,38 @@ class BreweriesNearMe::CLI
   def brewery_menu
     brewery_input = nil
 
-    while brewery_input != "exit"
-      puts "Enter the number of the brewery you'd like more info on:"
+    if brewery_input != "exit"
+      puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
       brewery_input = gets.strip
 
       if brewery_input.to_i > 0
         print_brewery_details(brewery_input)
-        brewery_menu
+        continue_with_app?
       elsif brewery_input == "list"
-        print_breweries
+        list_breweries
       elsif brewery_input == "exit"
-        list_cities
+        goodbye
       else
-        puts "Not sure what you want. Please type list or exit."
+        puts "Not sure what you want. Please type a number, list, or exit."
+        brewery_menu
       end
     end
+  end
 
+  def continue_with_app?
+    puts "Would you like to view another brewery in #{@city.name} or from a different city? Type brewery or city."
+    input = gets.strip.downcase
+    if input == "brewery"
+      brewery_menu
+    elsif input == "city"
+      start
+    else
+      puts "Not sure what you want. Here is list of breweries again from #{@city.name}."
+    end
   end
 
   def print_brewery_details(brewery_input)
-    BreweriesNearMe::Breweries.print_brewery_details(brewery_input)
+    BreweriesNearMe::Breweries.print_brewery_details(brewery_input, @breweries)
   end
 
   def goodbye
@@ -70,41 +89,3 @@ class BreweriesNearMe::CLI
   end
 
 end
-
-# def list_and_create_cities
-#   @cities = BreweriesNearMe::City.create_cities
-#   list_cities
-# end
-#
-# def list_cities
-#   puts "Here's a list of cities to choose from:"
-#   @cities.each.with_index(1) do |city, i|
-#     puts "#{i}. #{city.name}"
-#   end
-# end
-
-# def print_breweries
-#   @breweries = @cities[@city_input.to_i - 1].breweries
-#   puts "Here are the list of breweries:"
-#   @breweries.each.with_index(1) { |brewery, i|puts "#{i}. #{brewery.name}" }
-# end
-
-# def city_menu
-#   @city_input = nil
-#   while @city_input != "exit"
-#     puts "Enter the number of the city where you want to find breweries. You can also type list to see all of the cities again, or type exit to leave:"
-#     @city_input = gets.strip.downcase
-#
-#     if @city_input.to_i > 0
-#       print_breweries
-#       brewery_menu
-#     elsif @city_input == "list"
-#       list_cities
-#     elsif @city_input == "exit"
-#       goodbye
-#     else
-#       puts "Not sure what you want. Please type list or exit."
-#     end
-#   end
-#
-# end
