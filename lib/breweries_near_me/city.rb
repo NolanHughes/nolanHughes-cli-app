@@ -11,7 +11,6 @@ class BreweriesNearMe::City
     @@city
   end
 
-
   def self.new_city_from_input(city_name)
     city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
     city_instance << city

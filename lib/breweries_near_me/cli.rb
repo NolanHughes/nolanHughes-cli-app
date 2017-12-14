@@ -13,7 +13,7 @@ class BreweriesNearMe::CLI
     new_city_from_input(city_input)
     brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
     new_breweries_from_api(brewery_array)
-    # add_breweries_to_city
+
 
     list_breweries
 
@@ -25,7 +25,9 @@ class BreweriesNearMe::CLI
   end
 
   def new_breweries_from_api(brewery_array)
-    BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
+    binding.pry
+    breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
+    # BreweriesNearMe::Breweries.add_breweries_to_city(breweries)
   end
 
   def list_breweries

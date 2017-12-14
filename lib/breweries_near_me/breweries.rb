@@ -15,6 +15,8 @@ class BreweriesNearMe::Breweries
   end
 
   def self.new_breweries_from_api(all_breweries_in_city)
+    all_breweries_array = []
+
     all_breweries_in_city.each do |brewery|
       brewery_1 = self.new(
         brewery["brewery"]["name"],
@@ -22,8 +24,13 @@ class BreweriesNearMe::Breweries
         brewery["brewery"]["established"],
         brewery["breweryId"]
       )
-      all << brewery_1
+      all_breweries_array << brewery_1
     end
+    all_breweries_array
+  end
+
+  def add_breweries_to_city(breweries)
+    binding.pry
   end
 
 end
