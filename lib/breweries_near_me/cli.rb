@@ -1,4 +1,3 @@
-#add list and exit to everything
 #Figure out error if city_input does not equal real city
 class BreweriesNearMe::CLI
 
@@ -59,6 +58,7 @@ class BreweriesNearMe::CLI
         continue_with_app?
       elsif brewery_input == "list"
         list_breweries
+        brewery_menu
       elsif brewery_input == "exit"
         goodbye
       else
@@ -75,8 +75,13 @@ class BreweriesNearMe::CLI
       brewery_menu
     elsif input == "city"
       start
+    elsif input == "exit"
+      goodbye
     else
-      puts "Not sure what you want. Here is list of breweries again from #{@city.name}."
+      puts "I'm not sure what you want."
+      list_breweries
+      brewery_menu
+
     end
   end
 
