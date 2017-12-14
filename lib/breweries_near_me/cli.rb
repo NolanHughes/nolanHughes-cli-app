@@ -11,12 +11,11 @@ class BreweriesNearMe::CLI
     city_input = gets.strip.downcase
 
     new_city_from_input(city_input)
+
     brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
+
     new_breweries_from_api(brewery_array)
-    binding.pry
-
     list_breweries
-
     brewery_menu
   end
 
@@ -25,51 +24,45 @@ class BreweriesNearMe::CLI
   end
 
   def new_breweries_from_api(brewery_array)
-    breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
+    @breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
+    binding.pry
     BreweriesNearMe::Breweries.add_breweries_to_city(breweries)
   end
 
   def list_breweries
-    city = BreweriesNearMe::City.city_instance
+    city = BreweriesNearMe::City.city_instance.pop
     puts ""
     puts "Here are a list of breweries from #{city.name}:"
     puts ""
-    breweries = BreweriesNearMe::Breweries.all
 
-    breweries.each.with_index(1) do |brewery, i|
+    city.breweries.each.with_index(1) do |brewery, i|
       puts "#{i}. #{brewery.name}"
     end
   end
 
-  def print_brewery_details
-    brewery = @breweries[@brewery_input.to_i - 1]
-    puts "#{brewery.name}"
-    puts "Description: #{brewery.description}"
-    puts "Location: #{brewery.location}"
-    puts "Taproom: #{brewery.has_taproom}"
-    puts "Year Established: #{brewery.year_established}"
-    puts "Top-Rated Beers: \n#{brewery.beers}"
-  end
-
   def brewery_menu
-    @brewery_input = nil
+    brewery_input = nil
 
-    while @brewery_input != "exit"
+    while brewery_input != "exit"
       puts "Enter the number of the brewery you'd like more info on:"
-      @brewery_input = gets.strip.downcase
+      brewery_input = gets.strip
 
-      if @brewery_input.to_i > 0
-        print_brewery_details
+      if brewery_input.to_i > 0
+        print_brewery_details(brewery_input)
         brewery_menu
-      elsif @brewery_input == "list"
+      elsif brewery_input == "list"
         print_breweries
-      elsif @brewery_input == "exit"
+      elsif brewery_input == "exit"
         list_cities
       else
         puts "Not sure what you want. Please type list or exit."
       end
     end
 
+  end
+
+  def print_brewery_details(brewery_input)
+    BreweriesNearMe::Breweries.print_brewery_details(brewery_input)
   end
 
   def goodbye
