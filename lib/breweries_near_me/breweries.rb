@@ -4,12 +4,12 @@ class BreweriesNearMe::Breweries
 
   @@all_breweries_in_city = []
 
-  def initialize(name = nil, description = nil, year_established = nil, id = nil, year_round_beer = nil)
+  def initialize(name = nil, description = nil, year_established = nil, id = nil, beer = nil)
     @name = name
     @description = description
     @year_established = year_established
     @id = id
-    @year_round_beer = year_round_beer
+    @beer = beer
   end
 
   def self.all
@@ -17,13 +17,12 @@ class BreweriesNearMe::Breweries
   end
 
   def self.new_breweries_from_api(all_breweries_in_city)
-    all_breweries_array = []
+    # all_breweries_array = []
 
     all_breweries_in_city.each do |brewery|
 
       BreweriesNearMe::Beer.year_round_beer(brewery["breweryId"])
       beer_array = BreweriesNearMe::Beer.all
-
       brewery_1 = self.new(
         brewery["brewery"]["name"],
         brewery["brewery"]["description"],
@@ -31,10 +30,10 @@ class BreweriesNearMe::Breweries
         brewery["breweryId"],
         beer_array
       )
-      all_breweries_array << brewery_1
+      @@all_breweries_in_city << brewery_1
+      binding.pry
     end
-    all_breweries_array
-    binding.pry
+    all
   end
 
   def self.add_breweries_to_city(breweries)
