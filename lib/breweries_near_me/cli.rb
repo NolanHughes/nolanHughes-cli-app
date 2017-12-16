@@ -1,5 +1,4 @@
 #Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting.
-#When calling one city then another, it prints out breweries for both cities.
 class BreweriesNearMe::CLI
 
   def call
@@ -12,7 +11,8 @@ class BreweriesNearMe::CLI
     puts "Please enter the name of the city where you would like to find breweries."
 
     city_input = gets.strip.downcase
-    puts "Please wait a few momemnts. This might take awhile depending on how many breweries are in #{city_input.capiatlize}"
+    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{city_input.capitalize}."
+
     if city_input != "exit"
       new_city_from_input(city_input)
 

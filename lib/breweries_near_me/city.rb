@@ -1,3 +1,4 @@
+#make #city_array have all cities
 class BreweriesNearMe::City
   attr_accessor :name, :breweries
 
@@ -13,7 +14,7 @@ class BreweriesNearMe::City
 
   def self.new_city_from_input(city_name)
     city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
-    city_instance.shift#deletes @@city_array?
+    city_instance.shift
     city_instance << city
   end
 
