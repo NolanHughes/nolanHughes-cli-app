@@ -1,4 +1,4 @@
-#Figure out error if city_input does not equal real city
+#Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting.
 class BreweriesNearMe::CLI
 
   def call
@@ -16,10 +16,9 @@ class BreweriesNearMe::CLI
       new_city_from_input(city_input)
 
       brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
-      
+
       new_breweries_from_api(brewery_array)
       new_beers_from_api
-      #add_beers_to_breweries
       add_breweries_to_city
       list_breweries
       brewery_menu
@@ -33,7 +32,7 @@ class BreweriesNearMe::CLI
   end
 
   def new_breweries_from_api(brewery_array)
-    @breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)    
+    @breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
   end
 
   def new_beers_from_api
@@ -63,9 +62,9 @@ class BreweriesNearMe::CLI
       puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
       brewery_input = gets.strip
 
-      range = @breweries.size
+      last_number = @breweries.size
 
-      if brewery_input.to_i > 0 && brewery_input.to_i.between?(1, range)
+      if brewery_input.to_i > 0 && brewery_input.to_i.between?(1, last_number)
         print_brewery_details(brewery_input)
         continue_with_app?
       elsif brewery_input == "list"
@@ -81,9 +80,15 @@ class BreweriesNearMe::CLI
   end
 
   def continue_with_app?
-    puts "Would you like to view another brewery in #{@city.name} or from a different city? Type brewery or city."
+    puts "Would you like to view information about a particular beer, another brewery in #{@city.name}, or from a different city?"
+    puts "Type the brewery, city, or number of the beer."
     input = gets.strip.downcase
-    if input == "brewery"
+
+    last_number = #beer_array.size @city.breweries.
+
+    if input.to_i > 0 && input.to_i.between?(1, last_number)
+      #beer
+    elsif input == "brewery"
       brewery_menu
     elsif input == "city"
       start

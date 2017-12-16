@@ -18,16 +18,12 @@ class BreweriesNearMe::Breweries
   def self.new_breweries_from_api(breweries)
 
     breweries.each do |brewery|
-      # BreweriesNearMe::Beer.new_beers_from_api(brewery["breweryId"])
-      # 
-      # beer_array = BreweriesNearMe::Beer.all
-      
+
       brewery_1 = self.new(
         brewery["brewery"]["name"],
         brewery["brewery"]["description"],
         brewery["brewery"]["established"],
-        brewery["breweryId"],
-        # beer_array
+        brewery["breweryId"]
       )
       @@all_breweries_in_city << brewery_1
     end
@@ -35,13 +31,12 @@ class BreweriesNearMe::Breweries
   end
 
   def self.add_beers_to_brewery(beers)
-
-    all.each do |brewery| 
-      if brewery.id == beers.first.brewery_id 
+    all.each do |brewery|
+      if brewery.id == beers.first.brewery_id
         brewery.beer = beers
       end
     end
-        # binding.pry
+    # binding.pry
   end
 
   def self.add_breweries_to_city(breweries)
@@ -56,7 +51,8 @@ class BreweriesNearMe::Breweries
     puts "Description: #{brewery.description}"
     puts "Year Established: #{brewery.year_established}"
     puts "List of Beers:"
-    # brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
+    brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
+    #whats the retuen value of this? maybe use this to get beer info?
   end
 
 end
