@@ -90,7 +90,7 @@ class BreweriesNearMe::CLI
     last_number = @beer_at_brewery.size
 
     if input.to_i > 0 && input.to_i.between?(1, last_number)
-      puts @beer_at_brewery[input.to_i - 1]
+      print_beer_details(input)
       continue_with_app?
     elsif input == "breweries"
       brewery_menu
@@ -112,6 +112,14 @@ class BreweriesNearMe::CLI
     puts "Year Established: #{brewery.year_established}"
     puts "List of Beers:"
     brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
+  end
+
+  def print_beer_details(input)
+    beer = @beer_at_brewery[input.to_i - 1]
+    puts ""
+    puts beer.name
+    puts "Description: #{beer.description}"
+    # puts "Style: #{beer.style}"
   end
 
   def goodbye

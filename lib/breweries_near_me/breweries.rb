@@ -18,7 +18,7 @@ class BreweriesNearMe::Breweries
   def self.new_breweries_from_api(breweries)
 
     breweries.each do |brewery|
-
+      #format description
       brewery_1 = self.new(
         brewery["brewery"]["name"],
         brewery["brewery"]["description"],

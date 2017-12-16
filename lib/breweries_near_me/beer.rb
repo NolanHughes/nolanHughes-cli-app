@@ -24,7 +24,9 @@ class BreweriesNearMe::Beer
       if beer_array != nil
         first_three_beers = beer_array[0..2]
         first_three_beers.each do |beer|
-          a_beer = self.new(beer["name"], brewery.id)#, beer["description"], beer["style"]["shortName"])
+          style_name = []
+          #format description
+          a_beer = self.new(beer["name"], brewery.id, beer["description"])#, beer["style"]["shortName"]) #This is a load of barnacles!!!
           beers_in_brewery << a_beer
         end
       else
