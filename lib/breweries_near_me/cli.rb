@@ -12,7 +12,7 @@ class BreweriesNearMe::CLI
     puts "Please enter the name of the city where you would like to find breweries."
 
     city_input = gets.strip.downcase
-
+    puts "Please wait a few momemnts. This might take awhile depending on how many breweries are in #{city_input.capiatlize}"
     if city_input != "exit"
       new_city_from_input(city_input)
 

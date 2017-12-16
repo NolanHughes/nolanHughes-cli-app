@@ -27,6 +27,7 @@ class BreweriesNearMe::Breweries
       )
       @@all_breweries_in_city << brewery_1
     end
+    #is it here that I need to clear @@all_breweries_in_city
     all
   end
 
