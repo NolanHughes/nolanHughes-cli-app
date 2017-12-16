@@ -1,4 +1,5 @@
 #Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting.
+#When calling one city then another, it prints out breweries for both cities.
 class BreweriesNearMe::CLI
 
   def call
