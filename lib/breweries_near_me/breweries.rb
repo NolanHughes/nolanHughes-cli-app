@@ -36,23 +36,11 @@ class BreweriesNearMe::Breweries
         brewery.beer = beers
       end
     end
-    # binding.pry
   end
 
   def self.add_breweries_to_city(breweries)
     city = BreweriesNearMe::City.city_instance
     city.each { |city| city.breweries = breweries }
-  end
-
-  def self.print_brewery_details(input, breweries)
-    brewery = breweries[input.to_i - 1]
-    puts ""
-    puts "#{brewery.name}"
-    puts "Description: #{brewery.description}"
-    puts "Year Established: #{brewery.year_established}"
-    puts "List of Beers:"
-    brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
-    #whats the retuen value of this? maybe use this to get beer info?
   end
 
 end

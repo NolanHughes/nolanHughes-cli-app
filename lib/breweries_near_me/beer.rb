@@ -19,7 +19,7 @@ class BreweriesNearMe::Beer
     breweries.each do |brewery|
       beers_in_brewery = []
 
-      beer_array = get_beers
+      beer_array = BreweriesNearMe::API.get_year_round_beer(brewery.id)
 
       if beer_array != nil
         first_three_beers = beer_array[0..2]
@@ -30,18 +30,8 @@ class BreweriesNearMe::Beer
       else
         beers_in_brewery << a_beer = self.new("N/A", brewery.id)
       end
-      # binding.pry
-      add_beers
-      # binding.pry
+      BreweriesNearMe::Breweries.add_beers_to_brewery(beers_in_brewery)
     end
-  end
-
-  def get_beers
-    BreweriesNearMe::API.get_year_round_beer(brewery.id)
-  end
-
-  def add_beers
-    BreweriesNearMe::Breweries.add_beers_to_brewery(beers_in_brewery)
   end
 
 end
