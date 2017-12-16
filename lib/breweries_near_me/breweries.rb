@@ -1,7 +1,6 @@
 #remove duplicate breweries
 class BreweriesNearMe::Breweries
-  attr_accessor :name, :description, :year_established, :id, :year_round_beer#, :type :location, :has_taproom
-
+  attr_accessor :name, :description, :year_established, :id, :beer#, :type :location, :has_taproom
   @@all_breweries_in_city = []
 
   def initialize(name = nil, description = nil, year_established = nil, id = nil, beer = nil)
@@ -16,24 +15,33 @@ class BreweriesNearMe::Breweries
     @@all_breweries_in_city
   end
 
-  def self.new_breweries_from_api(all_breweries_in_city)
-    # all_breweries_array = []
+  def self.new_breweries_from_api(breweries)
 
-    all_breweries_in_city.each do |brewery|
-
-      BreweriesNearMe::Beer.year_round_beer(brewery["breweryId"])
-      beer_array = BreweriesNearMe::Beer.all
+    breweries.each do |brewery|
+      # BreweriesNearMe::Beer.new_beers_from_api(brewery["breweryId"])
+      # 
+      # beer_array = BreweriesNearMe::Beer.all
+      
       brewery_1 = self.new(
         brewery["brewery"]["name"],
         brewery["brewery"]["description"],
         brewery["brewery"]["established"],
         brewery["breweryId"],
-        beer_array
+        # beer_array
       )
       @@all_breweries_in_city << brewery_1
-      binding.pry
     end
     all
+  end
+
+  def self.add_beers_to_brewery(beers)
+
+    all.each do |brewery| 
+      if brewery.id == beers.first.brewery_id 
+        brewery.beer = beers
+      end
+    end
+        # binding.pry
   end
 
   def self.add_breweries_to_city(breweries)
@@ -47,7 +55,8 @@ class BreweriesNearMe::Breweries
     puts "#{brewery.name}"
     puts "Description: #{brewery.description}"
     puts "Year Established: #{brewery.year_established}"
-    puts "Year Round Beer: #{brewery.year_round_beer.join(", ")}"
+    puts "List of Beers:"
+    # brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
   end
 
 end
