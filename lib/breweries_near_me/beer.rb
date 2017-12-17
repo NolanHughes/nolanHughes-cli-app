@@ -1,5 +1,5 @@
 class BreweriesNearMe::Beer
-  attr_accessor :name, :description, :style, :brewery_id
+  attr_accessor :name, :description, :style, :brewery_id, :abv
 
   @@all_beers_in_brewery = []
 
@@ -7,10 +7,10 @@ class BreweriesNearMe::Beer
     @@all_beers_in_brewery
   end
 
-  def initialize(name = nil, brewery_id = nil, description = nil, style = nil)
+  def initialize(name = nil, brewery_id = nil, description = nil, abv = nil)
     @name = name
     @description = description
-    @style = style
+    @abv = abv
     @brewery_id = brewery_id
   end
 
@@ -25,8 +25,7 @@ class BreweriesNearMe::Beer
         first_three_beers = beer_array[0..2]
         first_three_beers.each do |beer|
           style_name = []
-          #format description
-          a_beer = self.new(beer["name"], brewery.id, beer["description"])#, beer["style"]["shortName"]) #This is a load of barnacles!!!
+          a_beer = self.new(beer["name"], brewery.id, beer["description"], beer["abv"])
           beers_in_brewery << a_beer
         end
       else

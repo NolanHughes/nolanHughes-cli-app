@@ -1,4 +1,5 @@
-#Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting.
+#Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting. Goes through program twice because I called it twice. Look at comment in API class.
+#install package that pops up everytime.
 class BreweriesNearMe::CLI
 
   def call
@@ -11,7 +12,7 @@ class BreweriesNearMe::CLI
     puts "Please enter the name of the city where you would like to find breweries."
 
     city_input = gets.strip.downcase
-    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{city_input.capitalize}."
+    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
 
     if city_input != "exit"
       new_city_from_input(city_input)
@@ -109,7 +110,7 @@ class BreweriesNearMe::CLI
   def print_brewery_details(brewery)
     puts ""
     puts "#{brewery.name}"
-    puts "Description: #{brewery.description}"
+    puts "Description: #{brewery.description.gsub(/\s+/, " ")}"
     puts "Year Established: #{brewery.year_established}"
     puts "List of Beers:"
     brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
@@ -119,8 +120,8 @@ class BreweriesNearMe::CLI
     beer = @beer_at_brewery[input.to_i - 1]
     puts ""
     puts beer.name
-    puts "Description: #{beer.description}"
-    # puts "Style: #{beer.style}"
+    puts "Description: #{beer.description.gsub(/\s+/, " ")}"
+    puts "ABV: #{beer.abv}%"
   end
 
   def goodbye
