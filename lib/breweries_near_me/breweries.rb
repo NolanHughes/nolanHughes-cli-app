@@ -1,6 +1,6 @@
 #remove duplicate breweries
 class BreweriesNearMe::Breweries
-  attr_accessor :name, :description, :year_established, :id, :beer#, :type :location, :has_taproom
+  attr_accessor :name, :description, :year_established, :id, :beer
   @@all_breweries_in_city = []
 
   def initialize(name = nil, description = nil, year_established = nil, id = nil, beer = nil)
@@ -18,7 +18,6 @@ class BreweriesNearMe::Breweries
   def self.new_breweries_from_api(breweries)
     all.clear
     breweries.each do |brewery|
-      #format description
       brewery_1 = self.new(
         brewery["brewery"]["name"],
         brewery["brewery"]["description"],
