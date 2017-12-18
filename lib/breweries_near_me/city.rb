@@ -5,17 +5,26 @@ class BreweriesNearMe::City
   def initialize(name)
     @name = name
   end
+  #Use all_cities for checking so don't instantiate multiple of same city
+  @@all_cities = []
 
-  @@city_array = []
+  def self.all
+    @@all_cities
+  end
 
-  def self.city_instance
-    @@city_array
+  def self.city_instance(city_input)
+    all.collect do |city|
+      if city.name == city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")
+        city
+      else
+        false
+      end
+    end
   end
 
   def self.new_city_from_input(city_name)
     city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
-    city_instance.shift
-    city_instance << city
+    all << city
   end
 
   def self.create_breweries
