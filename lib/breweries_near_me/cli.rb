@@ -17,7 +17,7 @@ class BreweriesNearMe::CLI
 
     if city_input != "exit"
       binding.pry
-      if !BreweriesNearMe::City.city_instance(city_input)
+      if !BreweriesNearMe::City.city_instance(city_input) #This is still equal to empty array instead of false
         new_city_from_input(city_input)
 
         brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
@@ -57,7 +57,7 @@ class BreweriesNearMe::CLI
     # @city = BreweriesNearMe::City.city_instance.first
 
     puts ""
-    puts "Here are a list of breweries from #{@city.name}:"
+    puts "Here are a list of breweries from #{@city}:"
     puts ""
 
     @city.breweries.each.with_index(1) do |brewery, i|
