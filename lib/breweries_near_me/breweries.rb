@@ -1,4 +1,3 @@
-#remove duplicate breweries
 class BreweriesNearMe::Breweries
   attr_accessor :name, :description, :year_established, :id, :beer
   @@all_breweries_in_city = []
@@ -26,7 +25,7 @@ class BreweriesNearMe::Breweries
       )
       @@all_breweries_in_city << brewery_1
     end
-    all
+    all.uniq { |brewery| brewery.id }
   end
 
   def self.add_beers_to_brewery(beers)
