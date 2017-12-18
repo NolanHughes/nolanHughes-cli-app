@@ -36,9 +36,11 @@ class BreweriesNearMe::Breweries
     end
   end
 
-  def self.add_breweries_to_city(breweries)
-    city = BreweriesNearMe::City.city_instance
-    city.each { |city| city.breweries = breweries }
+  def self.add_breweries_to_city(breweries, city_input)
+    city = BreweriesNearMe::City.all.find do |city_in_all|
+      city_in_all.name == city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")
+    end
+    city.breweries = breweries
   end
 
 end

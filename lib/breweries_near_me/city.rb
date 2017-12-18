@@ -1,3 +1,4 @@
+
 #make #city_array have all cities
 class BreweriesNearMe::City
   attr_accessor :name, :breweries
@@ -13,12 +14,8 @@ class BreweriesNearMe::City
   end
 
   def self.city_instance(city_input)
-    all.collect do |city|
-      if city.name == city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")
-        city
-      else
-        false
-      end
+    all.find do |city|
+      city.name == city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")
     end
   end
 

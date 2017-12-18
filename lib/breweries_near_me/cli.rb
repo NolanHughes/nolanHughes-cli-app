@@ -12,23 +12,23 @@ class BreweriesNearMe::CLI
     puts ""
     puts "Please enter the name of the city where you would like to find breweries."
 
-    city_input = gets.strip.downcase
-    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
+    @city_input = gets.strip.downcase
+    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
 
-    if city_input != "exit"
-      binding.pry
-      if !BreweriesNearMe::City.city_instance(city_input) #This is still equal to empty array instead of false
-        new_city_from_input(city_input)
+    if @city_input != "exit"
+      # binding.pry
+      if !BreweriesNearMe::City.city_instance(@city_input) #This is still equal to empty array instead of false
+        new_city_from_input(@city_input)
 
-        brewery_array = BreweriesNearMe::API.get_all_brewery_info(city_input)
+        brewery_array = BreweriesNearMe::API.get_all_brewery_info(@city_input)
 
         new_breweries_from_api(brewery_array)
         new_beers_from_api
         add_breweries_to_city
-        list_breweries(city_input)
+        list_breweries(@city_input)
         brewery_menu
       else
-        list_breweries(city_input)
+        list_breweries(@city_input)
         brewery_menu
       end
     else
@@ -49,7 +49,7 @@ class BreweriesNearMe::CLI
   end
 
   def add_breweries_to_city
-    BreweriesNearMe::Breweries.add_breweries_to_city(@breweries)
+    BreweriesNearMe::Breweries.add_breweries_to_city(@breweries, @city_input)
   end
 
   def list_breweries(city_input)
