@@ -3,23 +3,15 @@
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'nolanHughes_cli_app'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install nolanHughes_cli_app
+  $ gem install breweries_near_me
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the following and follow the on screen prompts.
+
+$ breweries_near_me
+
+You can enter any city and find out a list of breweries from that city. You can select which brewery you want and find out more info on that brewery. From there you can also find out info on 3 of the brewery's beers. Have fun and learn about beer culture all over the world!
 
 ## Development
 
