@@ -10,7 +10,6 @@ class BreweriesNearMe::API
     if brewery_array == nil
       puts "That doesn't appear to be a city in our database. Please try another city or check for misspellings."
       puts ""
-      #Ask about alternatives with someone.
       BreweriesNearMe::CLI.new.call
     else
       brewery_array

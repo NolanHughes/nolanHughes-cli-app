@@ -1,4 +1,3 @@
-#Figure out error if city_input does not equal real city. Mostly done but program still fails sometimes when exiting because of bad input. Seems like the program goes through my if statement in #start twice when exiting. Goes through program twice because I called it twice. Look at comment in API class.
 #install package that pops up everytime.
 #Maybe add a capitalize class so I don't call the long method over and over again.
 class BreweriesNearMe::CLI
@@ -13,19 +12,23 @@ class BreweriesNearMe::CLI
     puts "Please enter the name of the city where you would like to find breweries."
 
     @city_input = gets.strip.downcase
-    puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
+
 
     if @city_input != "exit"
-      if !BreweriesNearMe::City.city_instance(@city_input) #This is still equal to empty array instead of false
+      puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
+
+      if !BreweriesNearMe::City.city_instance(@city_input)
         new_city_from_input(@city_input)
 
-        brewery_array = BreweriesNearMe::API.get_all_brewery_info(@city_input)
+        @brewery_array = BreweriesNearMe::API.get_all_brewery_info(@city_input)
 
-        new_breweries_from_api(brewery_array)
-        new_beers_from_api
-        add_breweries_to_city
-        list_breweries(@city_input)
-        brewery_menu
+        if @brewery_array != nil
+          new_breweries_from_api(@brewery_array)
+          new_beers_from_api
+          add_breweries_to_city
+          list_breweries(@city_input)
+          brewery_menu
+        end
       else
         list_breweries(@city_input)
         brewery_menu
@@ -53,7 +56,7 @@ class BreweriesNearMe::CLI
 
   def list_breweries(city_input)
     @city = BreweriesNearMe::City.city_instance(city_input)
-    # @city = BreweriesNearMe::City.city_instance.first
+
     puts ""
     puts "Here are a list of breweries from #{@city.name}:"
     puts ""

@@ -1,12 +1,10 @@
-
-#make #city_array have all cities
 class BreweriesNearMe::City
   attr_accessor :name, :breweries
 
   def initialize(name)
     @name = name
   end
-  #Use all_cities for checking so don't instantiate multiple of same city
+
   @@all_cities = []
 
   def self.all
