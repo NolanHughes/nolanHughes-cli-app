@@ -22,7 +22,6 @@ class BreweriesNearMe::City
   def self.new_city_from_input(city_name)
     city = self.new(city_name.to_s.split(" ").collect { |e| e.capitalize }.join(" "))
     all << city
-    binding.pry
   end
 
   def self.create_breweries

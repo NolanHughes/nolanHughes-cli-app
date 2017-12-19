@@ -16,7 +16,6 @@ class BreweriesNearMe::CLI
     puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
 
     if @city_input != "exit"
-      # binding.pry
       if !BreweriesNearMe::City.city_instance(@city_input) #This is still equal to empty array instead of false
         new_city_from_input(@city_input)
 
@@ -55,9 +54,8 @@ class BreweriesNearMe::CLI
   def list_breweries(city_input)
     @city = BreweriesNearMe::City.city_instance(city_input)
     # @city = BreweriesNearMe::City.city_instance.first
-
     puts ""
-    puts "Here are a list of breweries from #{@city}:"
+    puts "Here are a list of breweries from #{@city.name}:"
     puts ""
 
     @city.breweries.each.with_index(1) do |brewery, i|
@@ -68,20 +66,22 @@ class BreweriesNearMe::CLI
   def brewery_menu
     brewery_input = nil
 
+    breweries = @city.breweries
+
     if brewery_input != "exit"
       puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
       brewery_input = gets.strip
 
-      last_number = @breweries.size
+      last_number = breweries.size
 
       if brewery_input.to_i > 0 && brewery_input.to_i.between?(1, last_number)
-        brewery = @breweries[brewery_input.to_i - 1]
+        brewery = breweries[brewery_input.to_i - 1]
         @beer_at_brewery = brewery.beer
 
         print_brewery_details(brewery)
         continue_with_app?
       elsif brewery_input == "list"
-        list_breweries
+        list_breweries(@city_input)
         brewery_menu
       elsif brewery_input == "exit"
         goodbye
@@ -94,7 +94,7 @@ class BreweriesNearMe::CLI
 
   def continue_with_app?
     puts "Would you like to view information about a particular beer, another brewery in #{@city.name}, or from a different city?"
-    puts "Type brewery, city, or the number of the beer."
+    puts "Type breweries, city, or the number of the beer."
     input = gets.strip.downcase
 
     last_number = @beer_at_brewery.size
@@ -110,7 +110,7 @@ class BreweriesNearMe::CLI
       goodbye
     else
       puts "I'm not sure what you want."
-      list_breweries
+      list_breweries(@city_input)
       brewery_menu
     end
   end
@@ -118,7 +118,7 @@ class BreweriesNearMe::CLI
   def print_brewery_details(brewery)
     puts ""
     puts "#{brewery.name}"
-    puts "Description: #{brewery.description.gsub(/\s+/, " ")}"
+    puts "Description: #{brewery.description}"
     puts "Year Established: #{brewery.year_established}"
     puts "List of Beers:"
     brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
@@ -128,7 +128,7 @@ class BreweriesNearMe::CLI
     beer = @beer_at_brewery[input.to_i - 1]
     puts ""
     puts beer.name
-    puts "Description: #{beer.description.gsub(/\s+/, " ")}"
+    puts "Description: #{beer.description}"
     puts "ABV: #{beer.abv}%"
   end
 
