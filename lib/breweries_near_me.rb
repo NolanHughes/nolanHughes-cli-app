@@ -1,4 +1,3 @@
-#delte pry before publishing
 require 'pry'
 require 'rest-client'
 require 'json'
