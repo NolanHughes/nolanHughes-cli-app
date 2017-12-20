@@ -1,3 +1,4 @@
+#intened for use while developing the app
 How to Build a CLI Gem
 
 1. Plan your gem, imagine your interface

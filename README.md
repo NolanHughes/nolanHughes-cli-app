@@ -1,27 +1,24 @@
-#Fill this out
 # NolanHughesCliApp
 
 ## Installation
 
-  $ gem install breweries_near_me
+Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app). Rub `bundle install` and follow usage instructions below.
 
 ## Usage
 
 Type the following and follow the on screen prompts.
 
-$ breweries_near_me
+$ bin/breweries-near-me
 
 You can enter any city and find out a list of breweries from that city. You can select which brewery you want and find out more info on that brewery. From there you can also find out info on 3 of the brewery's beers. Have fun and learn about beer culture all over the world!
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After checking out the repo, run `bundle install` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/'NolanHughes'/nolanHughes_cli_app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/NolanHughes/nolanHughes-cli-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 

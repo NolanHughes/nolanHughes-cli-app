@@ -1,5 +1,4 @@
-#install package that pops up everytime.
-#Maybe add a capitalize class so I don't call the long method over and over again.
+#Maybe add a capitalize class in a module so I don't call the long method over and over again.
 class BreweriesNearMe::CLI
 
   def call
