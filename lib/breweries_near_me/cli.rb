@@ -12,7 +12,6 @@ class BreweriesNearMe::CLI
 
     @city_input = gets.strip.downcase
 
-
     if @city_input != "exit"
       puts "Please wait a few moments. This might take a while depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
 
@@ -131,6 +130,7 @@ class BreweriesNearMe::CLI
     puts ""
     puts beer.name
     puts "Description: #{beer.description}"
+    puts "Style: #{beer.style}"
     puts "ABV: #{beer.abv}%"
   end
 
