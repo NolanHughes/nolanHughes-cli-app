@@ -14,7 +14,7 @@ class BreweriesNearMe::CLI
 
 
     if @city_input != "exit"
-      puts "Please wait a few moments. This might take awhile depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
+      puts "Please wait a few moments. This might take a while depending on how many breweries are in #{@city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
 
       if !BreweriesNearMe::City.city_instance(@city_input)
         new_city_from_input(@city_input)
