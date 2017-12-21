@@ -23,15 +23,9 @@ class BreweriesNearMe::API
     get_all_brewery_info(input)
 
     breweries = BreweriesNearMe::Breweries.all.uniq { |brewery| brewery.id }
-    #find_all?
-    breweries_in_city = []
-    breweries.each do |brewery|
-      if brewery.location == new_city.name
-        breweries_in_city << brewery
-      end
-    end
+    breweries = breweries.find_all { |brewery| brewery.location == new_city.name }
 
-    new_city.breweries = breweries_in_city
+    new_city.breweries = breweries
     new_city.save
     new_city
   end
@@ -58,15 +52,9 @@ class BreweriesNearMe::API
         get_beer_from_api(new_brewery.id)
 
         beers = BreweriesNearMe::Beer.all
-        #find_all?
-        beers_in_brewery = []
-        beers.each do |beer|
-          if beer.brewery_id == new_brewery.id
-            beers_in_brewery << beer
-          end
-        end
+        beers = beers.find_all { |beer| beer.brewery_id == new_brewery.id }
 
-        new_brewery.beer = beers_in_brewery
+        new_brewery.beer = beers
         new_brewery.save
       end
     end
