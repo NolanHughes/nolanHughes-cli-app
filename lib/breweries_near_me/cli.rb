@@ -45,12 +45,7 @@ class BreweriesNearMe::CLI
 
   def find_or_create_city(input)
     city = BreweriesNearMe::City.all.find { |city| city.name == input.to_s.split(" ").collect { |e| e.capitalize }.join(" ") }
-    #better way to write this?
-    if city
-      city
-    else
-      BreweriesNearMe::API.new.create_city(input)
-    end
+    city ? city : BreweriesNearMe::API.new.create_city(input)
   end
   #
   # def new_city_from_input(city_input)
@@ -70,7 +65,6 @@ class BreweriesNearMe::CLI
   # end
 
   def list_breweries(city)
-    # @city = BreweriesNearMe::City.city_instance(city_input)
     puts ""
     puts "Here are a list of breweries from #{city.name}:"
     puts ""
