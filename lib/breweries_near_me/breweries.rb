@@ -1,3 +1,4 @@
+#change to Brewery
 class BreweriesNearMe::Breweries
   attr_accessor :name, :description, :year_established, :id, :beer, :location
 
@@ -18,6 +19,10 @@ class BreweriesNearMe::Breweries
 
   def save
     @@all_breweries_in_city << self
+  end
+
+  def add_beers(beers)
+    self.beer = beers
   end
 
 end

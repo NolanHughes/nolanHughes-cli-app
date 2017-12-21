@@ -15,4 +15,8 @@ class BreweriesNearMe::City
     @@all_cities << self
   end
 
+  def add_breweries(breweries)
+    self.breweries = breweries
+  end
+
 end

@@ -16,9 +16,13 @@ class BreweriesNearMe::CLI
       puts "Please wait a few moments. This might take a while depending on how many breweries are in #{capitalize(city_input)}."
 
       city = find_or_create_city(city_input)
-      if !city.breweries.empty?
+      if city != nil
         list_breweries(city)
         brewery_menu(city)
+      else
+        puts "That doesn't appear to be a city in our database. Please try another city or check for misspellings."
+        puts ""
+        start
       end
     else
       goodbye
@@ -27,7 +31,11 @@ class BreweriesNearMe::CLI
 
   def find_or_create_city(input)
     city = BreweriesNearMe::City.all.find { |city| city.name == capitalize(input) }
-    city ? city : BreweriesNearMe::API.new.create_city(input)
+    if city
+      city
+    else
+      BreweriesNearMe::API.new.create_city(input)
+    end
   end
 
   def list_breweries(city)

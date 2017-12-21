@@ -1,3 +1,4 @@
+#filter out breweries with no info
 class BreweriesNearMe::API
   include Helpers
 
@@ -5,42 +6,40 @@ class BreweriesNearMe::API
     city_name = capitalize(input)
     new_city = BreweriesNearMe::City.new(city_name)
 
-    get_all_brewery_info(input)
+    brewery_array = get_all_brewery_info(input)
 
-    breweries = BreweriesNearMe::Breweries.all.uniq { |brewery| brewery.id }
-    breweries = breweries.find_all { |brewery| brewery.location == new_city.name }
+    if brewery_array == nil
+      nil
+    else
+      breweries = BreweriesNearMe::Breweries.all.uniq { |brewery| brewery.id }
+      breweries = breweries.find_all { |brewery| brewery.location == new_city.name }
 
-    new_city.breweries = breweries
-    new_city.save
-    new_city
+      new_city.add_breweries(breweries)
+      new_city.save
+      new_city
+    end
   end
 
   def get_all_brewery_info(input)
-    #Should I hide my api key somehow?
-    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=0cd9727ca8da27a76b3e6f7876fc6e6d&format=json"
+    #Should I hide my api key somehow? ***FIGURE THIS OUT***
+    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{ENV["API_KEY"]}&format=json"
 
     brewery_list = RestClient.get(all_breweries_url)
     parsed_list = JSON.parse(brewery_list)
     brewery_array = parsed_list["data"]
 
     if brewery_array == nil
-      puts "That doesn't appear to be a city in our database. Please try another city or check for misspellings."
-      puts ""
-      BreweriesNearMe::CLI.new.start
+      nil
     else
       brewery_array.each do |brewery|
         new_brewery = BreweriesNearMe::Breweries.new(brewery["brewery"]["name"], brewery["brewery"]["description"], brewery["brewery"]["established"], brewery["breweryId"], brewery["locality"])
-        # Why can't I do this?
-        # new_brewery.name = brewery["brewery"]["name"],
-        # new_brewery.description = brewery["brewery"]["description"],
-        # new_brewery.year_established = brewery["brewery"]["established"],
-        # new_brewery.id = brewery["breweryId"]
+
         get_beer_from_api(new_brewery.id)
 
         beers = BreweriesNearMe::Beer.all
         beers = beers.find_all { |beer| beer.brewery_id == new_brewery.id }
 
-        new_brewery.beer = beers
+        new_brewery.add_beers(beers)
         new_brewery.save
       end
     end
@@ -60,13 +59,7 @@ class BreweriesNearMe::API
         if beer["style"] != nil
           style_name = beer["style"]['shortName']
         end
-        new_beer = BreweriesNearMe::Beer.new
-
-        new_beer.name = beer["name"]
-        new_beer.brewery_id = the_brewery_id
-        new_beer.description = beer["description"]
-        new_beer.abv = beer["abv"]
-        new_beer.style = style_name
+        new_beer = BreweriesNearMe::Beer.new(beer["name"], the_brewery_id, beer["description"], beer["abv"],style_name)
 
         new_beer.save
       end
