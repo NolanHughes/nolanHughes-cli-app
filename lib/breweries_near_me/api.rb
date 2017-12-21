@@ -23,8 +23,8 @@ class BreweriesNearMe::API
     get_all_brewery_info(input)
 
     breweries = BreweriesNearMe::Breweries.all.uniq { |brewery| brewery.id }
+    #find_all?
     breweries_in_city = []
-
     breweries.each do |brewery|
       if brewery.location == new_city.name
         breweries_in_city << brewery
