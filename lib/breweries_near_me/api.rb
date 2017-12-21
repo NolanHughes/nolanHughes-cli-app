@@ -1,5 +1,5 @@
 class BreweriesNearMe::API
-
+  include Helpers
   # def self.get_all_brewery_info(input)
   #   city_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=0cd9727ca8da27a76b3e6f7876fc6e6d&format=json"
   #
@@ -17,7 +17,7 @@ class BreweriesNearMe::API
   # end
 
   def create_city(input)
-    city_name = input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")
+    city_name = capitalize(input)
     new_city = BreweriesNearMe::City.new(city_name)
 
     get_all_brewery_info(input)
@@ -31,6 +31,7 @@ class BreweriesNearMe::API
   end
 
   def get_all_brewery_info(input)
+    #Should I hide my api key somehow?
     all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=0cd9727ca8da27a76b3e6f7876fc6e6d&format=json"
 
     brewery_list = RestClient.get(all_breweries_url)

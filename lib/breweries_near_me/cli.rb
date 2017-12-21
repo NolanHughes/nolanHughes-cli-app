@@ -1,5 +1,5 @@
-#Maybe add a capitalize class in a module so I don't call the long method over and over again.
 class BreweriesNearMe::CLI
+  include Helpers
 
   def call
     puts "Welcome to Breweries Near You!"
@@ -13,7 +13,7 @@ class BreweriesNearMe::CLI
     city_input = gets.strip.downcase
 
     if city_input != "exit"
-      puts "Please wait a few moments. This might take a while depending on how many breweries are in #{city_input.to_s.split(" ").collect { |e| e.capitalize }.join(" ")}."
+      puts "Please wait a few moments. This might take a while depending on how many breweries are in #{capitalize(city_input)}."
 
       city = find_or_create_city(city_input)
       if !city.breweries.empty?
@@ -22,47 +22,13 @@ class BreweriesNearMe::CLI
       end
     else
       goodbye
-      # if !BreweriesNearMe::City.city_instance(@city_input)
-    #     new_city_from_input(@city_input)
-    #
-    #     @brewery_array = BreweriesNearMe::API.get_all_brewery_info(@city_input)
-    #
-    #     if @brewery_array != nil
-    #       new_breweries_from_api(@brewery_array)
-    #       new_beers_from_api
-    #       add_breweries_to_city
-    #       list_breweries(@city_input)
-    #       brewery_menu
-    #     end
-    #   else
-    #     list_breweries(@city_input)
-    #     brewery_menu
-    #   end
-    # else
-    #   goodbye
     end
   end
 
   def find_or_create_city(input)
-    city = BreweriesNearMe::City.all.find { |city| city.name == input.to_s.split(" ").collect { |e| e.capitalize }.join(" ") }
+    city = BreweriesNearMe::City.all.find { |city| city.name == capitalize(input) }
     city ? city : BreweriesNearMe::API.new.create_city(input)
   end
-  #
-  # def new_city_from_input(city_input)
-  #   BreweriesNearMe::City.new_city_from_input(city_input)
-  # end
-  #
-  # def new_breweries_from_api(brewery_array)
-  #   @breweries = BreweriesNearMe::Breweries.new_breweries_from_api(brewery_array)
-  # end
-  #
-  # def new_beers_from_api
-  #   BreweriesNearMe::Beer.new_beers_from_api(@breweries)
-  # end
-  #
-  # def add_breweries_to_city
-  #   BreweriesNearMe::Breweries.add_breweries_to_city(@breweries, @city_input)
-  # end
 
   def list_breweries(city)
     puts ""
