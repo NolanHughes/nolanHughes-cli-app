@@ -2,7 +2,7 @@
 
 ## Installation
 
-Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app). Rub `bundle install` and follow usage instructions below.
+Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app). Run `bundle install` and follow usage instructions below.
 
 ## Usage
 
