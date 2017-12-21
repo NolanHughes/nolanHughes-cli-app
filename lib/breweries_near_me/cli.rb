@@ -45,7 +45,7 @@ class BreweriesNearMe::CLI
 
     if brewery_input != "exit"
       puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
-      brewery_input = gets.strip
+      brewery_input = gets.strip.downcase
 
       last_number = breweries.size
 
