@@ -69,9 +69,7 @@ class BreweriesNearMe::CLI
     puts "Here are a list of breweries from #{city.name}:"
     puts ""
 
-    city.breweries.each.with_index(1) do |brewery, i|
-      puts "#{i}. #{brewery.name}"
-    end
+    city.breweries.each.with_index(1) { |brewery, i| puts "#{i}. #{brewery.name}" }
   end
 
   def brewery_menu(city)
