@@ -32,7 +32,7 @@ class BreweriesNearMe::CLI
 
   def list_breweries(city)
     puts ""
-    puts "Here are a list of breweries from #{city.name}:"
+    puts "Here is a list of breweries from #{city.name}:"
     puts ""
 
     city.breweries.each.with_index(1) { |brewery, i| puts "#{i}. #{brewery.name}" }
@@ -44,7 +44,7 @@ class BreweriesNearMe::CLI
     breweries = city.breweries
 
     if brewery_input != "exit"
-      puts "Enter the number of the brewery you'd like more info on, type list to see the list of breweries again, or type exit."
+      puts "Enter the number of the brewery you'd like more info on, type 'list' to see the breweries again from #{city.name}, 'city' for a different city, or type 'exit'."
       brewery_input = gets.strip.downcase
 
       last_number = breweries.size
@@ -58,18 +58,29 @@ class BreweriesNearMe::CLI
       elsif brewery_input == "list"
         list_breweries(city)
         brewery_menu(city)
+      elsif brewery_input == "city"
+        start
       elsif brewery_input == "exit"
         goodbye
       else
-        puts "Not sure what you want. Please type a number listed by the breweries, list, or exit."
+        puts "Not sure what you want."
         brewery_menu(city)
       end
     end
   end
 
+  def print_brewery_details(brewery)
+    puts ""
+    puts "#{brewery.name}"
+    puts "Description: #{brewery.description}"
+    puts "Year Established: #{brewery.year_established}"
+    puts "List of Beers:"
+    brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
+  end
+
   def continue_with_app?(beer_at_brewery, city)
     puts "Would you like to view information about a particular beer, another brewery in #{city.name}, or from a different city?"
-    puts "Type breweries, city, or the number of the beer."
+    puts "Type 'breweries', 'city', or the number of the beer."
     input = gets.strip.downcase
 
     last_number = beer_at_brewery.size
@@ -86,17 +97,8 @@ class BreweriesNearMe::CLI
     else
       puts "I'm not sure what you want."
       list_breweries(city)
-      brewery_menu
+      brewery_menu(city)
     end
-  end
-
-  def print_brewery_details(brewery)
-    puts ""
-    puts "#{brewery.name}"
-    puts "Description: #{brewery.description}"
-    puts "Year Established: #{brewery.year_established}"
-    puts "List of Beers:"
-    brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
   end
 
   def print_beer_details(input, beer_at_brewery)
