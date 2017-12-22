@@ -3,5 +3,12 @@
 require "bundler/setup"
 require "breweries_near_me"
 
-require "irb"
-IRB.start
+def reload!
+  load './lib/breweries_near_me/cli.rb'
+end
+
+require 'pry'
+Pry.start
+
+# require "irb"
+# IRB.start

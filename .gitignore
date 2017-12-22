@@ -6,3 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/.env/
+
+# Ignore application configuration
+/config/application.yml
