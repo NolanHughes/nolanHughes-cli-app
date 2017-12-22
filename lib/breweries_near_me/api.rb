@@ -11,7 +11,7 @@ class BreweriesNearMe::API
     if brewery_array == nil
       nil
     else
-      breweries = BreweriesNearMe::Breweries.all.uniq { |brewery| brewery.id }
+      breweries = BreweriesNearMe::Brewery.all.uniq { |brewery| brewery.id }
       breweries = breweries.find_all { |brewery| brewery.location == new_city.name }
 
       new_city.add_breweries(breweries)
@@ -32,7 +32,7 @@ class BreweriesNearMe::API
       nil
     else
       brewery_array.each do |brewery|
-        new_brewery = BreweriesNearMe::Breweries.new(brewery["brewery"]["name"], brewery["brewery"]["description"], brewery["brewery"]["established"], brewery["breweryId"], brewery["locality"])
+        new_brewery = BreweriesNearMe::Brewery.new(brewery["brewery"]["name"], brewery["brewery"]["description"], brewery["brewery"]["established"], brewery["breweryId"], brewery["locality"])
 
         get_beer_from_api(new_brewery.id)
 
