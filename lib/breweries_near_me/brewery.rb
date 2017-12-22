@@ -1,4 +1,3 @@
-#change to Brewery
 class BreweriesNearMe::Brewery
   attr_accessor :name, :description, :year_established, :id, :beer, :location
 

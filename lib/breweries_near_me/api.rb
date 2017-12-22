@@ -21,10 +21,11 @@ class BreweriesNearMe::API
   end
 
   def get_all_brewery_info(input)
-    key = ENV["API_KEY"]
+    key = "fuck this shit"
+    api_key = ENV["api_key"]
     binding.pry
     #Should I hide my api key somehow? ***FIGURE THIS OUT***
-    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{key}&format=json"
+    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{api_key}&format=json"
 
     brewery_list = RestClient.get(all_breweries_url)
     parsed_list = JSON.parse(brewery_list)
@@ -48,7 +49,9 @@ class BreweriesNearMe::API
   end
 
   def get_beer_from_api(the_brewery_id)
-    beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=0cd9727ca8da27a76b3e6f7876fc6e6d&format=json"
+    key = "fuck this shit"
+    binding.pry
+    beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=#{api_key}&format=json"
 
     beer_list = RestClient.get(beer_url)
     parsed_list = JSON.parse(beer_list)
