@@ -21,9 +21,7 @@ class BreweriesNearMe::API
   end
 
   def get_all_brewery_info(input)
-    key = "fuck this shit"
     api_key = ENV["api_key"]
-    binding.pry
     #Should I hide my api key somehow? ***FIGURE THIS OUT***
     all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{api_key}&format=json"
 
@@ -35,22 +33,25 @@ class BreweriesNearMe::API
       nil
     else
       brewery_array.each do |brewery|
-        new_brewery = BreweriesNearMe::Brewery.new(brewery["brewery"]["name"], brewery["brewery"]["description"], brewery["brewery"]["established"], brewery["breweryId"], brewery["locality"])
+        brewery_description = brewery["brewery"]["description"]
+        isClosed = brewery["isClosed"]
 
-        get_beer_from_api(new_brewery.id)
+        if brewery_description != nil && isClosed != "Y"
+          new_brewery = BreweriesNearMe::Brewery.new(brewery["brewery"]["name"], brewery_description, brewery["brewery"]["established"], brewery["breweryId"], brewery["locality"], isClosed)
 
-        beers = BreweriesNearMe::Beer.all
-        beers = beers.find_all { |beer| beer.brewery_id == new_brewery.id }
+          get_beer_from_api(new_brewery.id)
 
-        new_brewery.add_beers(beers)
-        new_brewery.save
+          beers = BreweriesNearMe::Beer.all
+          beers = beers.find_all { |beer| beer.brewery_id == new_brewery.id }
+
+          new_brewery.add_beers(beers)
+          new_brewery.save
+        end
       end
     end
   end
 
   def get_beer_from_api(the_brewery_id)
-    key = "fuck this shit"
-    binding.pry
     beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=#{api_key}&format=json"
 
     beer_list = RestClient.get(beer_url)

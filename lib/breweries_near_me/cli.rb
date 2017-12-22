@@ -21,7 +21,6 @@ class BreweriesNearMe::CLI
         brewery_menu(city)
       else
         puts "That doesn't appear to be a city in our database. Please try another city or check for misspellings."
-        puts ""
         start
       end
     else
@@ -40,10 +39,12 @@ class BreweriesNearMe::CLI
 
   def list_breweries(city)
     puts ""
-    puts "Here is a list of breweries from #{city.name}:"
+    puts "--------------#{city.name} Breweries--------------"
     puts ""
 
-    city.breweries.each.with_index(1) { |brewery, i| puts "#{i}. #{brewery.name}" }
+    city.breweries.each.with_index(1) do |brewery, i|
+      puts "#{i}. #{brewery.name}"
+    end
   end
 
   def brewery_menu(city)
@@ -79,11 +80,12 @@ class BreweriesNearMe::CLI
 
   def print_brewery_details(brewery)
     puts ""
-    puts "#{brewery.name}"
+    puts "--------------#{brewery.name}--------------"
     puts "Description: #{brewery.description}"
     puts "Year Established: #{brewery.year_established}"
     puts "List of Beers:"
     brewery.beer.each.with_index(1) { |beer, i| puts "  #{i}. #{beer.name}" }
+    puts ""
   end
 
   def continue_with_app?(beer_at_brewery, city)
@@ -112,7 +114,7 @@ class BreweriesNearMe::CLI
   def print_beer_details(input, beer_at_brewery)
     beer = beer_at_brewery[input.to_i - 1]
     puts ""
-    puts beer.name
+    puts "--------------#{beer.name}--------------"
     puts "Description: #{beer.description}"
     puts "Style: #{beer.style}"
     puts "ABV: #{beer.abv}%"
