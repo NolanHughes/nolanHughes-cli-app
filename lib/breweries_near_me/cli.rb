@@ -15,7 +15,8 @@ class BreweriesNearMe::CLI
     if city_input != "exit"
       puts "Please wait a few moments. This might take a while depending on how many breweries are in #{capitalize(city_input)}."
 
-      city = find_or_create_city(city_input)
+      # city = find_or_create_city(city_input)
+      city = find_or_scrape_city(city_input)
       if city != nil
         list_breweries(city)
         brewery_menu(city)
@@ -25,6 +26,15 @@ class BreweriesNearMe::CLI
       end
     else
       goodbye
+    end
+  end
+
+  def find_or_scrape_city(city_input)
+    city = BreweriesNearMe::City.all.find { |city| city.name == capitalize(city_input) }
+    if city
+      city
+    else
+      BreweriesNearMe::Scraper.new.create_city_from_scrape(city_input)
     end
   end
 

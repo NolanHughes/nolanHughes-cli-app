@@ -4,7 +4,7 @@ require "bundler/setup"
 require "breweries_near_me"
 
 def reload!
-  load './lib/breweries_near_me/cli.rb'
+  load './lib/breweries_near_me/scraper.rb'
 end
 
 require 'pry'
