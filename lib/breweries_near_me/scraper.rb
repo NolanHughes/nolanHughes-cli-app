@@ -33,9 +33,21 @@ class BreweriesNearMe::Scraper
         name_and_ratings
       end
     end
-    #Add specific brewery url/id to top_ten_breweries. Brewery at this point should have name, url/id, and rating.
-    top_ten_breweries_with_unnecessary_elements = breweries_that_have_ratings.reject { |brewery| brewery.nil? || brewery.empty?}[0..9]
-    #top_ten_breweries now has two elements, name and avg beer rating
-    top_ten_breweries = top_ten_breweries_with_unnecessary_elements.collect { |brewery| brewery.slice!(1..2) }
+    top_ten_breweries = breweries_that_have_ratings.reject { |brewery| brewery.nil? || brewery.empty?}[0..9]
+    #top_ten_breweries now has two elements, name and avg beer rating. #put in specific brewery url/id to top_ten_breweries. Brewery at this point should have name, url/id, and rating.
+    top_ten_breweries.collect { |brewery| brewery.slice!(1..2) }
+    binding.pry
+    top_ten_breweries.each do |brewery|
+        new_brewery = BreweriesNearMe::Brewery.new(brewery[0], brewery["breweryId"], brewery[1] )#id won't work as is.
+
+        get_beer_from_brewery_page(new_brewery.id)
+
+        beers = BreweriesNearMe::Beer.all
+        beers = beers.find_all { |beer| beer.brewery_id == new_brewery.id }
+
+        new_brewery.add_beers(beers)
+        new_brewery.save
+      end
+    end
   end
 end

@@ -1,16 +1,16 @@
 class BreweriesNearMe::Brewery
-  attr_accessor :name, :description, :year_established, :id, :beer, :location, :isClosed
+  attr_accessor :name, :id, :avg_beer_rating, :description, :year_established, :beer, :location
 
   @@all_breweries_in_city = []
 
-  def initialize(name = nil, description = nil, year_established = nil, id = nil, location = nil, isClosed = nil, beer = nil)
+  def initialize(name = nil, id = nil, avg_beer_rating = nil, description = nil, year_established = nil, location = nil, beer = nil)
     @name = name
+    @id = id
+    @avg_beer_rating = avg_beer_rating
     @description = description
     @year_established = year_established
-    @id = id
     @beer = beer
     @location = location
-    @isClosed = isClosed
   end
 
   def self.all
