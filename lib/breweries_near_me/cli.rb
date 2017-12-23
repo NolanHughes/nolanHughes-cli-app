@@ -34,7 +34,7 @@ class BreweriesNearMe::CLI
     if city
       city
     else
-      BreweriesNearMe::Scraper.new.create_city_from_scrape(city_input)
+      BreweriesNearMe::Scraper.new.create_city(city_input)
     end
   end
 

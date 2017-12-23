@@ -1,4 +1,3 @@
-#filter out breweries with no info
 class BreweriesNearMe::API
   include Helpers
 
