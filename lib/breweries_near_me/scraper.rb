@@ -50,4 +50,26 @@ class BreweriesNearMe::Scraper
       end
     end
   end
+
+  def get_beer_from_api(the_brewery_id)
+    beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=#{api_key}&format=json" #change url. everything below this is just copied from api class.
+
+    beer_list = RestClient.get(beer_url)
+    parsed_list = JSON.parse(beer_list)
+    beer_array = parsed_list["data"]
+
+    if beer_array
+
+      first_three_beers = beer_array[0..2]
+      first_three_beers.each do |beer|
+        if beer["style"] != nil
+          style_name = beer["style"]['shortName']
+        end
+        new_beer = BreweriesNearMe::Beer.new(beer["name"], the_brewery_id, beer["description"], beer["abv"],style_name)
+
+        new_beer.save
+      end
+    end
+  end
+
 end
