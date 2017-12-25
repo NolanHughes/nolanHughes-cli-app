@@ -17,6 +17,7 @@ class BreweriesNearMe::CLI
 
       # city = find_or_create_city(city_input)
       city = find_or_scrape_city(city_input)
+      binding.pry
       if city != nil
         list_breweries(city)
         brewery_menu(city)

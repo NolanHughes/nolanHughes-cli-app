@@ -3,7 +3,7 @@ class BreweriesNearMe::Brewery
 
   @@all_breweries_in_city = []
 
-  def initialize(name = nil, id = nil, avg_beer_rating = nil, description = nil, year_established = nil, location = nil, beer = nil)
+  def initialize(name = nil, avg_beer_rating = nil, id = nil, description = nil, year_established = nil, location = nil, beer = nil)
     @name = name
     @id = id
     @avg_beer_rating = avg_beer_rating
