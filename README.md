@@ -2,7 +2,12 @@
 
 ## Installation
 
-Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app). Run `bundle install` and follow usage instructions below.
+Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app).
+
+Run 'bundle install' to install dependencies.
+
+Go to BreweryDb.com. Click on the developers tab and sign up for an account. After you sign up you can request an api key and use it with this app.
+In 'lib/breweries_near_me.rb', make the api key that you got from BreweryDb.com the value of the key/value pair in the hash.
 
 ## Usage
 
