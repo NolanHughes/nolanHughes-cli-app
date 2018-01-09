@@ -1,5 +1,5 @@
 class BreweriesNearMe::API
-  include Helpers
+     include Helpers
 
   def create_city(input)
     city_name = capitalize(input)
