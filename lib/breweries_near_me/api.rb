@@ -1,6 +1,5 @@
-#filter out breweries with no info
 class BreweriesNearMe::API
-  include Helpers
+     include Helpers
 
   def create_city(input)
     city_name = capitalize(input)
@@ -21,9 +20,8 @@ class BreweriesNearMe::API
   end
 
   def get_all_brewery_info(input)
-    api_key = ENV["api_key"]
     #Should I hide my api key somehow? ***FIGURE THIS OUT***
-    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{api_key}&format=json"
+    all_breweries_url = "https://api.brewerydb.com/v2/locations?locality=#{input}&key=#{ENV["API_KEY"]}&format=json"
 
     brewery_list = RestClient.get(all_breweries_url)
     parsed_list = JSON.parse(brewery_list)
@@ -52,7 +50,7 @@ class BreweriesNearMe::API
   end
 
   def get_beer_from_api(the_brewery_id)
-    beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=#{api_key}&format=json"
+    beer_url = "https://api.brewerydb.com/v2/brewery/#{the_brewery_id}/beers?key=#{ENV["API_KEY"]}&format=json"
 
     beer_list = RestClient.get(beer_url)
     parsed_list = JSON.parse(beer_list)
