@@ -8,7 +8,7 @@ Run 'bundle install' to install dependencies.
 
 Go to BreweryDb.com. Click on the developers tab and sign up for an account. After you sign up you can request an api key and use it with this app.
 
-Create a file called '.env' in the root directory. In that file, create a global variable called API_KEY and set it equal to the api key you received from BreweryDb.com. Make sure to add .env to your .gitignore file so that your api key remains secret.
+Create a file called '.env' in the root directory. In that file, create a global variable called API_KEY and set it equal to the api key you received from BreweryDb.com. Make sure .env is in your .gitignore file (it might already be there) so that your api key remains secret.
 
 ## Usage
 
