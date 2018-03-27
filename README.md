@@ -7,7 +7,8 @@ Clone repo from github (https://github.com/NolanHughes/nolanHughes-cli-app).
 Run 'bundle install' to install dependencies.
 
 Go to BreweryDb.com. Click on the developers tab and sign up for an account. After you sign up you can request an api key and use it with this app.
-In 'lib/key.rb', make the api key that you got from BreweryDb.com the value of 'ENV["API_KEY"]'.
+
+Create a file called '.env' in the root directory. In that file, create a global variable called API_KEY and set it equal to the api key you received from BreweryDb.com. Make sure to add .env to your .gitignore file so that your api key remains secret.
 
 ## Usage
 
